@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "skipLibCheck": true,
+    "module": "node16",
+    "outDir": "lib",
+    "strict": true,
+    "target": "esnext",
+    "sourceMap": true,
+    "lib": ["esnext"],
+    "noEmit": true,
+    "incremental": true
+  },
+  "include": [ "src/**/*", "test/**/*", "**/.eslintrc.js", "nyc.config.js" ],
+  "exclude": ["lib/**/*"]
+}
