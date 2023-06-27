@@ -1,0 +1,4 @@
+{
+  "sources": ["src/**/*"],
+  "all": true
+}
