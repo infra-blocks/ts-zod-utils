@@ -14,7 +14,7 @@
     "prepack": "npm run build",
     "build": "npm run clean && tsc --project tsconfig.build.json",
     "compile": "tsc",
-    "clean": "rm -rf lib && rm -f breather-infra-*.tgz",
+    "clean": "rm -rf lib && rm -f infra-blocks-*.tgz",
     "lint": "eslint --ext .js,.ts --max-warnings 0 .",
     "test": "npm run test:unit",
     "test:coverage": "c8 npm run test",
