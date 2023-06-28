@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { testMe } from "../../src/index.js";
+import { expect } from "@infra-blocks/test";
 
 describe("index", function () {
   describe(testMe.name, function () {
