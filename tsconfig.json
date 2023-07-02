@@ -11,6 +11,6 @@
     "noEmit": true,
     "incremental": true
   },
-  "include": [ "src/**/*", "test/**/*", "**/.eslintrc.js", "nyc.config.js" ],
+  "include": [ "src/**/*", "test/**/*", "**/.eslintrc.cjs" ],
   "exclude": ["lib/**/*"]
 }
