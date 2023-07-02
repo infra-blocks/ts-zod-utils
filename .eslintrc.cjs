@@ -14,9 +14,6 @@ module.exports = {
     "prettier",
     "plugin:prettier/recommended",
   ],
-  rules: {
-    "@typescript-eslint/no-use-before-define": "off",
-  },
   env: {
     node: true,
   },
