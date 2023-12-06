@@ -1,6 +1,14 @@
-const { register } = require("node:module");
-const { pathToFileURL } = require("node:url");
+const [nodeMajorVersion] = process.versions.node.split(".").map(Number);
 
-register("ts-node/esm", pathToFileURL("./"));
+if (nodeMajorVersion >= 20) {
+  const { register } = require("node:module");
+  const { pathToFileURL } = require("node:url");
 
-module.exports = {};
+  register("ts-node/esm", pathToFileURL("./"));
+
+  module.exports = {};
+} else {
+  module.exports = {
+    loader: ["ts-node/esm"],
+  };
+}
