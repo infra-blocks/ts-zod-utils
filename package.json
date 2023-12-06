@@ -25,7 +25,7 @@
   "devDependencies": {
     "@infra-blocks/test": "^0.1.1",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.19.2",
+    "@types/node": "^20.10.3",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "c8": "^8.0.0",
