@@ -5,14 +5,19 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ["./tsconfig.json"],
   },
-  plugins: ["@typescript-eslint", "prettier"],
-  extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier",
-    "plugin:prettier/recommended",
+  plugins: ["prettier"],
+  extends: ["eslint:recommended", "prettier", "plugin:prettier/recommended"],
+  ignorePatterns: ["!.mocharc.cjs"],
+  overrides: [
+    {
+      files: ["**/*.ts"],
+      plugins: ["@typescript-eslint"],
+      extends: [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      ],
+    },
   ],
   env: {
     node: true,
