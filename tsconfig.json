@@ -11,6 +11,6 @@
     "noEmit": true,
     "incremental": true
   },
-  "include": [ "src/**/*", "test/**/*", "**/.eslintrc.cjs" ],
+  "include": [ "src/**/*", "test/**/*", "**/.eslintrc.cjs", "**/.mocharc.cjs" ],
   "exclude": ["lib/**/*"]
 }
