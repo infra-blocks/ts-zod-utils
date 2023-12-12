@@ -38,4 +38,7 @@ npm run test
 
 ### Package publication
 
-Package publication is done manually at the moment.
+This package leverages the [npm-publish-from-label](https://github.com/infrastructure-blocks/npm-publish-from-label-action) action
+as a turnkey, automated mechanism for publishing packages. Refer to its documentation to understand its capabilities.
+
+Packages should therefore not be published manually, as these tasks are automated by the CI.
