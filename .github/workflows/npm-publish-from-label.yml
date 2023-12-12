@@ -33,4 +33,4 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         with:
-          github-pat: ${{ secrets.PAT }}
+          github-token: ${{ secrets.PAT }}
