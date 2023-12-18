@@ -1,0 +1,18 @@
+name: Trigger Update From Template
+
+# We do it on pull request "merge" event so we can get the label and propagate it more easily.
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - closed
+
+permissions:
+  pull-requests: read
+
+jobs:
+  trigger-update-from-template:
+    uses: infrastructure-blocks/trigger-update-from-template-workflow/.github/workflows/trigger-update-from-template.yml@v1
+    secrets:
+      github-pat: ${{ secrets.PAT }}

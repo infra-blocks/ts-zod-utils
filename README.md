@@ -4,6 +4,7 @@ This repository is a template to generate repositories meant to hold the source 
 of NPM packages written in TypeScript.
 
 Follow these steps after instantiating the template:
+- Remove the [trigger update from template workflow](.github/workflows/trigger-update-from-template.yml)
 - Update the .nvmrc version file to latest
 - Update the package.json
   - Rename the package name and links
