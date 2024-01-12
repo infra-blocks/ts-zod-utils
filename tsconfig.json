@@ -7,10 +7,22 @@
     "strict": true,
     "target": "esnext",
     "sourceMap": true,
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "noEmit": true,
     "incremental": true
   },
-  "include": [ "src/**/*", "test/**/*", "**/.eslintrc.cjs", "**/.mocharc.cjs" ],
-  "exclude": ["lib/**/*"]
+  "include": [
+    "**/*.ts",
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.json",
+    "**/.eslintrc.cjs",
+    "**/.mocharc.cjs"
+  ],
+  "exclude": [
+    "lib/**/*"
+  ]
 }

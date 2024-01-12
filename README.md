@@ -17,8 +17,6 @@ Follow these steps after instantiating the template:
 - Rename the header of this document to match the repository
 - Replace this section of this document to include a description of the new package
 - Configure code coverage
-- Add the publication labels on the new repository: `patch`, `minor`, `major`, `no version`.
-- Add branch protection rules
 
 ## Development
 

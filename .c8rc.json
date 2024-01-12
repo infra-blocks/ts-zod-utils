@@ -1,4 +1,6 @@
 {
-  "src": ["src"],
+  "src": [
+    "src"
+  ],
   "all": true
 }

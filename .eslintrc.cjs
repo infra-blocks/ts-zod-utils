@@ -7,8 +7,15 @@ module.exports = {
   },
   plugins: ["prettier"],
   extends: ["eslint:recommended", "prettier", "plugin:prettier/recommended"],
-  ignorePatterns: ["!.mocharc.cjs"],
+  ignorePatterns: ["!.mocharc.cjs", "!.c8rc.json"],
   overrides: [
+    {
+      files: ["**/*.json"],
+      plugins: ["json-format"],
+      settings: {
+        "json/json-with-comments-files": [],
+      },
+    },
     {
       files: ["**/*.ts"],
       plugins: ["@typescript-eslint"],
