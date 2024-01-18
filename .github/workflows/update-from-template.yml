@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   merge-template:
-    uses: infrastructure-blocks/merge-template-workflow/.github/workflows/merge-template.yml@v1
+    uses: infrastructure-blocks/merge-template-workflow/.github/workflows/workflow.yml@v1
     with:
       labels: ${{ inputs.labels }}
     secrets:
