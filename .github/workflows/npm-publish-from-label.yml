@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   npm-publish-from-label:
-    uses: infrastructure-blocks/npm-publish-from-label-workflow/.github/workflows/npm-publish-from-label.yml@v1
+    uses: infrastructure-blocks/npm-publish-from-label-workflow/.github/workflows/workflow.yml@v1
     secrets:
       github-pat: ${{ secrets.PAT }}
       npm-token: ${{ secrets.NPM_PUBLISH_TOKEN }}
