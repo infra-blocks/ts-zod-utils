@@ -13,6 +13,6 @@ permissions:
 
 jobs:
   trigger-update-from-template:
-    uses: infrastructure-blocks/trigger-update-from-template-workflow/.github/workflows/workflow.yml@v1
+    uses: infrastructure-blocks/trigger-update-from-template-workflow/.github/workflows/workflow.yml@v2
     secrets:
       github-pat: ${{ secrets.PAT }}
