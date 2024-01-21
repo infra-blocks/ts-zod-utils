@@ -1,0 +1,18 @@
+name: NPM Publish From Label
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  npm-publish-release:
+    uses: infrastructure-blocks/npm-publish-from-label-workflow/.github/workflows/workflow.yml@v3
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      skip-ci: true
+    secrets:
+      github-token: ${{ secrets.PAT }}
+      npm-token: ${{ secrets.NPM_PUBLISH_TOKEN }}
