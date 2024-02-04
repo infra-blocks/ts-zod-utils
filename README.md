@@ -1,6 +1,6 @@
 # ts-lib-template
 [![Build](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/build.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/build.yml)
-[![NPM Publish Release From Label](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/nm-publish-release-from-label.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/nm-publish-release-from-label.yml)
+[![NPM Publish Release From Label](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/npm-publish-release-from-label.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/nm-publish-release-from-label.yml)
 [![Trigger Update From Template](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml)
 
 This repository is a template to generate repositories meant to hold the source code
