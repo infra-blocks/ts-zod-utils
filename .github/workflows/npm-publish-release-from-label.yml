@@ -1,4 +1,4 @@
-name: NPM Publish From Label
+name: NPM Publish Release From Label
 
 on:
   push:

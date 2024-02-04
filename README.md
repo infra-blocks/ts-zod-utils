@@ -1,10 +1,14 @@
 # ts-lib-template
+[![Build](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/build.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/build.yml)
+[![NPM Publish Release From Label](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/nm-publish-release-from-label.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/nm-publish-release-from-label.yml)
+[![Trigger Update From Template](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml)
 
 This repository is a template to generate repositories meant to hold the source code
 of NPM packages written in TypeScript.
 
 Follow these steps after instantiating the template:
 - Remove the [trigger update from template workflow](.github/workflows/trigger-update-from-template.yml)
+- Configure code coverage
 - Update the .nvmrc version file to latest
 - Update the package.json
   - Rename the package name and links
@@ -14,9 +18,11 @@ Follow these steps after instantiating the template:
 - Run `npm install`
 - Run `npm run compile && npm run lint && npm run test`
 - Edit the `.npmrc` file if you wish to change the defaults. Specifically, if you wish to make your package private.
-- Rename the header of this document to match the repository
-- Replace this section of this document to include a description of the new package
-- Configure code coverage
+- Update the status badges:
+  - Remove the `Trigger Update From Template` status badge.
+  - Add the `Update From Template` status badge.
+  - Rename the rest of the links to point to the right repository.
+- Edit this readme to correspond to the package.
 
 ## Development
 
