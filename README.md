@@ -2,6 +2,7 @@
 [![Build](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/build.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/build.yml)
 [![NPM Publish Release From Label](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/npm-publish-release-from-label.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/npm-publish-release-from-label.yml)
 [![Trigger Update From Template](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml/badge.svg)](https://github.com/infrastructure-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml)
+[![codecov](https://codecov.io/gh/infrastructure-blocks/ts-lib-template/graph/badge.svg?token=vyI1qM1EZg)](https://codecov.io/gh/infrastructure-blocks/ts-lib-template)
 
 This repository is a template to generate repositories meant to hold the source code
 of NPM packages written in TypeScript.
