@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "skipLibCheck": true,
+    "module": "node16",
+    "outDir": "lib",
+    "strict": true,
+    "target": "esnext",
+    "sourceMap": true,
+    "lib": [
+      "esnext"
+    ],
+    "noEmit": true,
+    "incremental": true
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.js",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.json",
+    "**/.eslintrc.cjs",
+    "**/.mocharc.cjs"
+  ],
+  "exclude": [
+    "lib/**/*"
+  ]
+}

@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  push:
+    # This turns off running for tags
+    branches:
+      - "**"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    uses: infrastructure-blocks/typescript-build-workflow/.github/workflows/workflow.yml@v1
+    with:
+      node-version-file: .nvmrc
+    secrets:
+      codecov-token: ${{ secrets.CODECOV_TOKEN }}
+  build-legacy:
+    uses: infrastructure-blocks/typescript-build-workflow/.github/workflows/workflow.yml@v1
+    strategy:
+      matrix:
+        node-version: [18]
+    with:
+      node-version: ${{ matrix.node-version }}
