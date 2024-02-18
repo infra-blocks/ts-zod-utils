@@ -1,7 +1,7 @@
 {
-  "name": "@infra-blocks/lib-template",
+  "name": "@infra-blocks/zod-utils",
   "version": "0.0.0",
-  "description": "This repository is a template to generate repositories meant to hold the source code of NPM packages written in TypeScript.",
+  "description": "Extensions to the zod package.",
   "license": "ISC",
   "author": "",
   "type": "module",
