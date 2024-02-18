@@ -21,6 +21,9 @@
     "test:integration": "mocha --config test/integration/.mocharc.js 'test/integration/**/*.spec.ts'",
     "test:unit": "mocha --config test/unit/.mocharc.cjs 'test/unit/**/*.spec.ts'"
   },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
   "devDependencies": {
     "@infra-blocks/test": "^0.1.1",
     "@types/mocha": "^10.0.1",
