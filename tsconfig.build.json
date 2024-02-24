@@ -1,7 +1,10 @@
 {
   "extends": "./tsconfig",
   "compilerOptions": {
-    "noEmit": false
+    "declaration": true,
+    "noEmit": false,
+    "outDir": "./lib/esm",
+    "sourceMap": true
   },
   "include": [
     "src/**/*.ts"
