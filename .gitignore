@@ -1,5 +1,4 @@
-node_modules/
+/node_modules/
 /lib/
-coverage/
-.nyc_output/
+/coverage/
 infra-blocks-*.tgz
