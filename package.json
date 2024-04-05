@@ -1,14 +1,21 @@
 {
   "name": "@infra-blocks/zod-utils",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Extensions to the zod package.",
   "license": "ISC",
   "author": "",
   "type": "module",
   "exports": {
-    "import": "./lib/esm/index.js",
-    "require": "./lib/cjs/index.js",
-    "default": "./lib/esm/index.js"
+    ".": {
+      "import": "./lib/esm/index.js",
+      "require": "./lib/cjs/index.js",
+      "default": "./lib/esm/index.js"
+    },
+    "./json": {
+      "import": "./lib/esm/json/types.js",
+      "require": "./lib/cjs/json/types.js",
+      "default": "./lib/esm/json/types.js"
+    }
   },
   "files": [
     "lib/**/*.{js,cjs,mjs,json,d.ts,map}"

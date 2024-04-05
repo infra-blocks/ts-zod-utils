@@ -1,8 +1,7 @@
-import { json, jsonFromString } from "./json.js";
+import { json } from "./json/index.js";
 
 const zu = {
   json,
-  jsonFromString,
 };
 
 export { zu };
