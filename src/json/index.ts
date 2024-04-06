@@ -1,11 +1,13 @@
-import { json, literal, stringifiedJson } from "./json.js";
+import { array, object, json, primitive, stringifiedJson } from "./json.js";
 
 const module = (() => {
   function module() {
     return json();
   }
+  module.array = array;
+  module.object = object;
+  module.primitive = primitive;
   module.stringified = stringifiedJson;
-  module.literal = literal;
 
   return module;
 })();
