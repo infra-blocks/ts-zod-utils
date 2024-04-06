@@ -1,1 +1,1 @@
-export type { Literal, Json } from "./json.js";
+export type { JsonPrimitive, JsonObject, JsonArray, Json } from "./json.js";

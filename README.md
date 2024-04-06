@@ -35,9 +35,9 @@ zu.json().parse({
   }
 });
 // Throws for bullshit.
-zu.json().parse(undefined);
-zu.json().parse(Symbol("nope"));
-zu.json().parse(new Set());
+zu.json().parse(undefined); // Boom.
+zu.json().parse(Symbol("nope")); // Boom.
+zu.json().parse(new Set()); // Boom.
 // etc...
 
 // You can also parse stringified JSON!
@@ -46,13 +46,40 @@ zu.json.stringified().parse('"JSON string"'); // Returns "JSON string". Note the
 zu.json.stringified().parse(JSON.strinfify({ field: "value" })); // Returns {field: "value"}.
 
 // Inferred types are exported for convenience.
-import { Json, Literal } from "@infra-blocks/zod-utils/json";
+import { Json } from "@infra-blocks/zod-utils/json";
 
 // Compiles.
 const myJson: Json = { hello: "world" };
-// Doesn't compile.
+// Doesn't compile: undefined is not valid JSON.
 const boom: Json = { nope: undefined };
 ````
+
+The package also allows using sub schemas:
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { JsonArray, JsonObject, JsonPrimitive } from "@infra-blocks/zod-utils/json";
+
+// The type hints are used just to showcase their usage. They aren't necessary when parsing.
+// Want to parse a JSON primitive?
+const jsonPrimitive: JsonPrimitive = zu.json.primitive().parse(5);
+// Will throw for anything that is not a JSON primitive.
+zu.json.primitive().parse([]); // Boom.
+zu.json.primitive().parse({}); // Boom.
+zu.json.primitive().parse(undefined); // Boom.
+
+// A JSON array maybe?
+const jsonArray: JsonArray = zu.json.array().parse([1, 2, 3]);
+// Will throw for anything that is not a JSON array.
+zu.json.array().parse(5); // Boom.
+zu.json.array().parse({}); // Boom.
+
+// And finally, what about making sure you get a JSON object?
+const jsonObject: JsonObject = zu.json.object().parse({ hello: "world" });
+// You know it by now, but just to make sure.
+zu.json.object().parse(5); // Boom.
+zu.json.object().parse([]); // Boom.
+```
 
 ## Development
 
