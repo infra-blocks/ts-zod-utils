@@ -15,6 +15,11 @@
       "import": "./lib/esm/json/types.js",
       "require": "./lib/cjs/json/types.js",
       "default": "./lib/esm/json/types.js"
+    },
+    "./geojson": {
+      "import": "./lib/esm/geojson/types.js",
+      "require": "./lib/cjs/geojson/types.js",
+      "default": "./lib/esm/geojson/types.js"
     }
   },
   "files": [
@@ -39,6 +44,7 @@
   },
   "devDependencies": {
     "@infra-blocks/test": "^0.3.1",
+    "@types/lodash": "^4.17.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.10.3",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
@@ -48,6 +54,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-json-format": "^2.0.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "lodash": "^4.17.21",
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
