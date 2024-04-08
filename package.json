@@ -2,6 +2,10 @@
   "name": "@infra-blocks/zod-utils",
   "version": "0.4.1",
   "description": "Extensions to the zod package.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infrastructure-blocks/ts-zod-utils.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "module",
