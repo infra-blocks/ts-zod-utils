@@ -2,6 +2,12 @@
   "name": "@infra-blocks/zod-utils",
   "version": "0.4.2",
   "description": "Extensions to the zod package.",
+  "keywords": [
+    "zod",
+    "json",
+    "geojson",
+    "parser"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/infrastructure-blocks/ts-zod-utils.git"
