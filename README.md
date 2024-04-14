@@ -13,6 +13,7 @@ Follow these steps after instantiating the template:
 - Update the .nvmrc version file to latest
 - Update the package.json
   - Rename the package name and links
+  - Edit the search keywords
   - Update the `engines` section
 - Update the dependencies
 - Run `nvm install`
