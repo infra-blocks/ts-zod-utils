@@ -22,5 +22,5 @@ jobs:
       skip: ${{ needs.check-has-semver-label.outputs.matched-label == 'no version' }}
       skip-ci: true
     secrets:
-      github-token: ${{ github.token }}
+      github-token: ${{ secrets.PAT }}
       npm-token: ${{ secrets.NPM_PUBLISH_TOKEN }}
