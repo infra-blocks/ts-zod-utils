@@ -1,6 +1,6 @@
 {
   "name": "@infra-blocks/lib-template",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "This repository is a template to generate repositories meant to hold the source code of NPM packages written in TypeScript.",
   "keywords": [
     "template",
