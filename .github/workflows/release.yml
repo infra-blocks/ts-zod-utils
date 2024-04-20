@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  check-has-semver-label:
+    permissions:
+      pull-requests: write
+    uses: infrastructure-blocks/check-has-semver-label-workflow/.github/workflows/workflow.yml@v2
+  npm-publish-release:
+    needs:
+      - check-has-semver-label
+    uses: infrastructure-blocks/npm-publish-from-semver-increment-workflow/.github/workflows/workflow.yml@v1
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      semver-increment: ${{ needs.check-has-semver-label.outputs.matched-label }}
+      skip: ${{ needs.check-has-semver-label.outputs.matched-label == 'no version' }}
+      skip-ci: true
+    secrets:
+      github-token: ${{ secrets.PAT }}
+      npm-token: ${{ secrets.NPM_PUBLISH_TOKEN }}
