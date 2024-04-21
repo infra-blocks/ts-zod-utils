@@ -18,6 +18,17 @@ jobs:
     permissions:
       pull-requests: write
     uses: infrastructure-blocks/check-has-semver-label-workflow/.github/workflows/workflow.yml@v2
+  check-has-changelog-version-matching-semver-increment:
+    needs:
+      - check-has-semver-label
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: infrastructure-blocks/check-has-changelog-version-matching-semver-increment-workflow/.github/workflows/workflow.yml@v1
+    with:
+      semver-increment: ${{ needs.check-has-semver-label.outputs.matched-label }}
+      package-type: npm
+      skip: ${{ needs.check-has-semver-label.outputs.matched-label == 'no version' }}
   npm-publish-prerelease:
     needs:
       - check-has-semver-label

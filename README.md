@@ -9,19 +9,17 @@ of NPM packages written in TypeScript.
 
 Follow these steps after instantiating the template:
 - Remove the [trigger update from template workflow](.github/workflows/trigger-update-from-template.yml)
+- Do a global search & replace for `ts-lib-template` and replace it with the name of your repository
+- Likewise, do a search and replace for the *name of the package* in the `package.json` file
 - Configure code coverage
-- Update the .nvmrc version file to latest
-- Update the package.json
-  - Rename the package name and links
+- Update the status badges:
+  - Replace the `Trigger Update From Template` status badge for the `Update From Template` status badge.
+- Update package.json
   - Edit the search keywords
-  - Update the `engines` section
-- Update the dependencies
-- Run `nvm install`
-- Run `npm install`
+  - Edit the description
+- Describe the package and its usage in this readme.
+- Replace the [changelog](CHANGELOG.md) with the [stub](CHANGELOG-STUB.md) and prepare it for the first version of
+the package that will be released.
+- Run `nvm install && npm install`
 - Run `npm run compile && npm run lint && npm run test`
 - Edit the `.npmrc` file if you wish to change the defaults. Specifically, if you wish to make your package private.
-- Update the status badges:
-  - Remove the `Trigger Update From Template` status badge.
-  - Add the `Update From Template` status badge.
-  - Rename the rest of the links to point to the right repository.
-- Edit this readme to correspond to the package.
