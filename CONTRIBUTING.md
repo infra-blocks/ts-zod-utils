@@ -20,5 +20,5 @@ npm run test
 ### Package publication
 
 Package publication is fully automated at the CI level. This repository leverages the
-[npm-publish-from-label-workflow](https://github.com/infrastructure-blocks/npm-publish-from-label-workflow)
+[npm-publish-from-label-workflow](https://github.com/infra-blocks/npm-publish-from-label-workflow)
 workflow as a turnkey, automated mechanism for publishing packages. Refer to its documentation for usage information.
