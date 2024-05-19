@@ -12,13 +12,13 @@ concurrency:
 
 jobs:
   build:
-    uses: infrastructure-blocks/typescript-build-workflow/.github/workflows/workflow.yml@v1
+    uses: infra-blocks/typescript-build-workflow/.github/workflows/workflow.yml@v1
     with:
       node-version-file: .nvmrc
     secrets:
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
   build-legacy:
-    uses: infrastructure-blocks/typescript-build-workflow/.github/workflows/workflow.yml@v1
+    uses: infra-blocks/typescript-build-workflow/.github/workflows/workflow.yml@v1
     strategy:
       matrix:
         node-version: [18]
