@@ -2,7 +2,7 @@
 [![Build](https://github.com/infra-blocks/ts-lib-template/actions/workflows/build.yml/badge.svg)](https://github.com/infra-blocks/ts-lib-template/actions/workflows/build.yml)
 [![Release](https://github.com/infra-blocks/ts-lib-template/actions/workflows/release.yml/badge.svg)](https://github.com/infra-blocks/ts-lib-template/actions/workflows/release.yml)
 [![Trigger Update From Template](https://github.com/infra-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml/badge.svg)](https://github.com/infra-blocks/ts-lib-template/actions/workflows/trigger-update-from-template.yml)
-[![codecov](https://codecov.io/gh/infra-blocks/ts-lib-template/graph/badge.svg?token=vyI1qM1EZg)](https://codecov.io/gh/infra-blocks/ts-lib-template)
+[![codecov](https://codecov.io/gh/infra-blocks/ts-lib-template/graph/badge.svg?token=VFA2PIC95S)](https://codecov.io/gh/infra-blocks/ts-lib-template)
 
 [//]: # ([![Update From Template]&#40;https://github.com/infra-blocks/ts-lib-template/actions/workflows/update-from-template.yml/badge.svg&#41;]&#40;https://github.com/infra-blocks/ts-lib-template/actions/workflows/update-from-template.yml&#41;)
 
