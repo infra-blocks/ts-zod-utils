@@ -16,13 +16,13 @@ export type JsonArray = Array<Json>;
 export type Json = JsonPrimitive | JsonObject | JsonArray;
 
 const jsonSchema: z.ZodType<Json> = z.lazy(() =>
-  z.union([primitive(), z.array(jsonSchema), z.record(jsonSchema)])
+  z.union([primitive(), z.array(jsonSchema), z.record(z.string(), jsonSchema)])
 );
 export function json() {
   return jsonSchema;
 }
 
-const objectSchema = z.record(jsonSchema);
+const objectSchema = z.record(z.string(), jsonSchema);
 export function object() {
   return objectSchema;
 }
@@ -32,7 +32,7 @@ export function array() {
   return arraySchema;
 }
 
-export const stringifiedJsonSchema: z.ZodType<Json, z.ZodTypeDef, string> = z
+export const stringifiedJsonSchema: z.ZodType<Json, string> = z
   .string()
   .transform((str, ctx) => {
     try {
