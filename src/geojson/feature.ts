@@ -7,7 +7,7 @@ const featureSchema = schemaWithBoundingBox.extend({
   type: z.literal("Feature"),
   geometry: geometry().nullable(),
   id: z.union([z.string(), z.number()]).optional(),
-  properties: z.record(json()).nullable(),
+  properties: z.record(z.string(), json()).nullable(),
 });
 
 export type GeoJsonFeature = z.infer<typeof featureSchema>;

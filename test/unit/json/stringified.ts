@@ -17,9 +17,7 @@ export function injectStringifiedTests() {
         expect(zu.json.stringified().parse("null")).to.be.null;
       });
       it("should work as a default value", function () {
-        expect(zu.json.stringified().default("42").parse(undefined)).to.equal(
-          42
-        );
+        expect(zu.json.stringified().default(42).parse(undefined)).to.equal(42);
       });
       it("should throw for undefined", function () {
         expect(() => zu.json.stringified().parse(undefined)).to.throw();
@@ -52,7 +50,7 @@ export function injectStringifiedTests() {
       it("should work as a default value", function () {
         const value = [42, "hello", false, null];
         expect(
-          zu.json.stringified().default(JSON.stringify(value)).parse(undefined)
+          zu.json.stringified().default(value).parse(undefined)
         ).to.deep.equal(value);
       });
       it("should throw for undefined", function () {
@@ -105,7 +103,7 @@ export function injectStringifiedTests() {
           null: null,
         };
         expect(
-          zu.json.stringified().default(JSON.stringify(value)).parse(undefined)
+          zu.json.stringified().default(value).parse(undefined)
         ).to.deep.equal(value);
       });
       it("should throw with a field undefined", function () {

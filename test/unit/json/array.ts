@@ -2,7 +2,7 @@ import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 
 export function injectArrayTests() {
-  describe("array", function () {
+  describe(zu.json.array.name, function () {
     it("should work with empty array", function () {
       expect(zu.json.array().parse([])).to.deep.equal([]);
     });

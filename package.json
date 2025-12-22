@@ -50,7 +50,7 @@
     "test:unit": "mocha --config test/unit/.mocharc.cjs 'test/unit/**/*.spec.ts'"
   },
   "dependencies": {
-    "zod": "^3.22.4"
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@infra-blocks/test": "^0.3.1",
