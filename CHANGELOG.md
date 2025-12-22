@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.5.0] - 2025-12-22
 
+### Added
+
+- The `zu.csv()` schema to parse and transform comma separated strings into arrays.
+
 ### Changed
 
 - Updated to `zod@4`. This exports the breaking changes between `zod@3` and `zod@4`.
