@@ -50,10 +50,11 @@
     "test:unit": "mocha --config test/unit/.mocharc.cjs 'test/unit/**/*.spec.ts'"
   },
   "dependencies": {
+    "@infra-blocks/types": "^0.24.0",
     "zod": "^4.2.1"
   },
   "devDependencies": {
-    "@infra-blocks/test": "^0.3.1",
+    "@infra-blocks/test": "^0.6.0",
     "@types/lodash": "^4.17.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.10.3",
@@ -68,7 +69,7 @@
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=18.0.0"

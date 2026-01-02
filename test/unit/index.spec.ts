@@ -1,5 +1,6 @@
-import { expect } from "@infra-blocks/test";
+import { expect, expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../src/index.js";
+import { z } from "zod";
 import { injectGeoJsonTests } from "./geojson/index.js";
 import { injectJsonTests } from "./json/index.js";
 
@@ -21,6 +22,24 @@ describe("zu", function () {
         "x",
         "y",
       ]);
+    });
+  });
+  describe(zu.typeGuard.name, function () {
+    type Test = z.infer<typeof schema>;
+
+    const schema = z.string().min(5).brand("Test");
+    const guard = zu.typeGuard(schema);
+
+    it("should correctly narrow the type of the value upon success", function () {
+      // Note that the type of myString here is `"hello world"`, and not `string`.
+      // The guard then asserts that myString is `"hello world" & z.$brand<"Test">` instead
+      // of `string & z.$brand<"Test">`, which is indeed compatible with `Test`, but not equal to it.
+      const myString = "hello world";
+      if (guard(myString)) {
+        expectTypeOf(myString).toExtend<Test>();
+      } else {
+        expect.fail("Type guard failed unexpectedly");
+      }
     });
   });
 });
