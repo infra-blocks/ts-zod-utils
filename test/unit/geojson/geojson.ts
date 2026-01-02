@@ -1,6 +1,5 @@
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import _ = require("lodash/fp");
 
 export function geojsonTests() {
   const schema = zu.geojson();
@@ -98,7 +97,7 @@ export function geojsonTests() {
     };
 
     it("should throw for missing type", function () {
-      const value = _.omit("type", validValue);
+      const { type: _, ...value } = validValue;
       expect(() => schema.parse(value)).to.throw();
     });
     it("should throw for invalid type", function () {

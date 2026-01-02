@@ -1,6 +1,5 @@
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import _ = require("lodash/fp");
 
 export function lineStringTests() {
   describe(zu.geojson.lineString.name, function () {
@@ -37,7 +36,7 @@ export function lineStringTests() {
       };
 
       it("should throw for missing type", function () {
-        const value = _.omit("type", validValue);
+        const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for invalid type", function () {
@@ -48,7 +47,7 @@ export function lineStringTests() {
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for missing coordinates", function () {
-        const value = _.omit("coordinates", validValue);
+        const { coordinates: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for empty coordinates", function () {

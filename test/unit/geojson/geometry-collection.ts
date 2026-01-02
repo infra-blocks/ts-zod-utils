@@ -1,6 +1,5 @@
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import _ = require("lodash/fp");
 
 export function geometryCollectionTests() {
   describe(zu.geojson.geometryCollection.name, function () {
@@ -123,7 +122,7 @@ export function geometryCollectionTests() {
       };
 
       it("should throw for missing type", function () {
-        const value = _.omit("type", validValue);
+        const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for invalid type", function () {
@@ -134,7 +133,7 @@ export function geometryCollectionTests() {
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for missing geometries", function () {
-        const value = _.omit("geometries", validValue);
+        const { geometries: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for invalid geometry", function () {

@@ -21,6 +21,6 @@ jobs:
     uses: infra-blocks/typescript-build-workflow/.github/workflows/workflow.yml@v1
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [22]
     with:
       node-version: ${{ matrix.node-version }}

@@ -1,6 +1,5 @@
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import _ = require("lodash/fp");
 
 export function polygonTests() {
   describe(zu.geojson.polygon.name, function () {
@@ -42,7 +41,7 @@ export function polygonTests() {
       };
 
       it("should throw for missing type", function () {
-        const value = _.omit("type", validValue);
+        const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for invalid type", function () {
@@ -53,7 +52,7 @@ export function polygonTests() {
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for missing coordinates", function () {
-        const value = _.omit("coordinates", validValue);
+        const { coordinates: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for single tuple outer ring coordinates", function () {

@@ -1,6 +1,5 @@
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import _ = require("lodash/fp");
 
 export function multiLineStringTests() {
   describe(zu.geojson.multiLineString.name, function () {
@@ -50,7 +49,7 @@ export function multiLineStringTests() {
       };
 
       it("should throw for missing type", function () {
-        const value = _.omit("type", validValue);
+        const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for invalid type", function () {
@@ -61,7 +60,7 @@ export function multiLineStringTests() {
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for missing coordinates", function () {
-        const value = _.omit("coordinates", validValue);
+        const { coordinates: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for single line string empty coordinates", function () {

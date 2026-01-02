@@ -1,6 +1,5 @@
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import _ = require("lodash/fp");
 
 export function featureCollectionTests() {
   describe(zu.geojson.featureCollection.name, function () {
@@ -43,7 +42,7 @@ export function featureCollectionTests() {
       };
 
       it("should throw for missing type", function () {
-        const value = _.omit("type", validValue);
+        const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for invalid type", function () {
@@ -54,7 +53,7 @@ export function featureCollectionTests() {
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for missing features", function () {
-        const value = _.omit("features", validValue);
+        const { features: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
       it("should throw for invalid features", function () {
