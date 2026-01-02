@@ -5,7 +5,7 @@ import { injectStringifiedTests } from "./stringified.js";
 import { injectJsonValueTests } from "./value.js";
 
 export function injectJsonTests() {
-  describe("json", function () {
+  describe("json", () => {
     injectPrimitiveTests();
     injectArrayTests();
     injectObjectTests();

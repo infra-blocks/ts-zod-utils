@@ -1,7 +1,7 @@
+import type { TypeGuard } from "@infra-blocks/types";
 import { z } from "zod";
-import { json } from "./json/index.js";
 import { geojson } from "./geojson/index.js";
-import { TypeGuard } from "@infra-blocks/types";
+import { json } from "./json/index.js";
 
 const csvSchema = z.string().transform((str) => str.split(","));
 
@@ -51,7 +51,7 @@ function typeGuard<S extends z.ZodType>(schema: S): TypeGuard<z.infer<S>> {
  */
 function validate<S extends z.ZodType>(
   schema: S,
-  value: unknown
+  value: unknown,
 ): value is z.infer<S> {
   return schema.safeParse(value).success;
 }

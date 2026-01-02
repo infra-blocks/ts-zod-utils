@@ -5,9 +5,7 @@
     "outDir": "./lib/compile",
     "strict": true,
     "target": "esnext",
-    "lib": [
-      "esnext"
-    ],
+    "lib": ["esnext"],
     "noEmit": true,
     "incremental": true
   },
@@ -20,7 +18,5 @@
     "**/.eslintrc.cjs",
     "**/.mocharc.cjs"
   ],
-  "exclude": [
-    "lib/**/*"
-  ]
+  "exclude": ["lib/**/*"]
 }

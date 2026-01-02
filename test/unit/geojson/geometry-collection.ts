@@ -1,19 +1,18 @@
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import _ = require("lodash/fp");
 
 export function geometryCollectionTests() {
-  describe(zu.geojson.geometryCollection.name, function () {
+  describe(zu.geojson.geometryCollection.name, () => {
     const schema = zu.geojson.geometryCollection();
-    describe("valid values", function () {
-      it("should work with empty geometries", function () {
+    describe("valid values", () => {
+      it("should work with empty geometries", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [],
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a line string", function () {
+      it("should work with a line string", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [
@@ -28,7 +27,7 @@ export function geometryCollectionTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a multi-line string", function () {
+      it("should work with a multi-line string", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [
@@ -45,7 +44,7 @@ export function geometryCollectionTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a multi-point", function () {
+      it("should work with a multi-point", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [
@@ -57,7 +56,7 @@ export function geometryCollectionTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a multi-polygon", function () {
+      it("should work with a multi-polygon", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [
@@ -69,7 +68,7 @@ export function geometryCollectionTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a point", function () {
+      it("should work with a point", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [
@@ -81,7 +80,7 @@ export function geometryCollectionTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a polygon", function () {
+      it("should work with a polygon", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [
@@ -93,7 +92,7 @@ export function geometryCollectionTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a geometry collection", function () {
+      it("should work with a geometry collection", () => {
         const value = {
           type: "GeometryCollection",
           geometries: [
@@ -111,7 +110,7 @@ export function geometryCollectionTests() {
         expect(schema.parse(value)).to.deep.equal(value);
       });
     });
-    describe("invalid values", function () {
+    describe("invalid values", () => {
       const validValue = {
         type: "GeometryCollection",
         geometries: [
@@ -122,22 +121,22 @@ export function geometryCollectionTests() {
         ],
       };
 
-      it("should throw for missing type", function () {
-        const value = _.omit("type", validValue);
+      it("should throw for missing type", () => {
+        const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid type", function () {
+      it("should throw for invalid type", () => {
         const value = {
           ...validValue,
           type: "BigGeometryCollection",
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for missing geometries", function () {
-        const value = _.omit("geometries", validValue);
+      it("should throw for missing geometries", () => {
+        const { geometries: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid geometry", function () {
+      it("should throw for invalid geometry", () => {
         const value = {
           ...validValue,
           geometries: [
@@ -149,7 +148,7 @@ export function geometryCollectionTests() {
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for extra properties", function () {
+      it("should throw for extra properties", () => {
         const value = {
           ...validValue,
           extra: "boom",
