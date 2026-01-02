@@ -1,21 +1,21 @@
-import { GeoJsonBoundingBox, boundingBox } from "./bounding-box.js";
+import { boundingBox, type GeoJsonBoundingBox } from "./bounding-box.js";
+import { coordinate, type GeoJsonCoordinate } from "./coordinate.js";
+import { feature, type GeoJsonFeature } from "./feature.js";
 import {
   featureCollection,
-  GeoJsonFeatureCollection,
+  type GeoJsonFeatureCollection,
 } from "./feature-collection.js";
-import { GeoJsonFeature, feature } from "./feature.js";
-import { GeoJson, geojson } from "./geojson.js";
-import { GeoJsonGeometry, geometryCollection } from "./geometry.js";
-import { GeoJsonLineString, lineString } from "./line-string.js";
+import { type GeoJson, geojson } from "./geojson.js";
+import { type GeoJsonGeometry, geometryCollection } from "./geometry.js";
+import { type GeoJsonLineString, lineString } from "./line-string.js";
 import {
-  GeoJsonMultiLineString,
+  type GeoJsonMultiLineString,
   multiLineString,
 } from "./multi-line-string.js";
-import { GeoJsonMultiPoint, multiPoint } from "./multi-point.js";
-import { GeoJsonMultiPolygon, multiPolygon } from "./multi-polygon.js";
-import { GeoJsonPoint, point } from "./point.js";
-import { GeoJsonPolygon, polygon } from "./polygon.js";
-import { GeoJsonCoordinate, coordinate } from "./coordinate.js";
+import { type GeoJsonMultiPoint, multiPoint } from "./multi-point.js";
+import { type GeoJsonMultiPolygon, multiPolygon } from "./multi-polygon.js";
+import { type GeoJsonPoint, point } from "./point.js";
+import { type GeoJsonPolygon, polygon } from "./polygon.js";
 
 const module = (() => {
   function impl() {

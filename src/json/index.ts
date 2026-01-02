@@ -1,4 +1,4 @@
-import { array, object, json, primitive, stringifiedJson } from "./json.js";
+import { array, json, object, primitive, stringifiedJson } from "./json.js";
 
 const module = (() => {
   function module() {

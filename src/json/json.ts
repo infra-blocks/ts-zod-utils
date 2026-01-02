@@ -16,7 +16,7 @@ export type JsonArray = Array<Json>;
 export type Json = JsonPrimitive | JsonObject | JsonArray;
 
 const jsonSchema: z.ZodType<Json> = z.lazy(() =>
-  z.union([primitive(), z.array(jsonSchema), z.record(z.string(), jsonSchema)])
+  z.union([primitive(), z.array(jsonSchema), z.record(z.string(), jsonSchema)]),
 );
 export function json() {
   return jsonSchema;
@@ -37,7 +37,7 @@ export const stringifiedJsonSchema: z.ZodType<Json, string> = z
   .transform((str, ctx) => {
     try {
       return JSON.parse(str) as Json;
-    } catch (e) {
+    } catch {
       ctx.addIssue({ code: "custom", message: "Invalid JSON" });
       return z.NEVER;
     }
