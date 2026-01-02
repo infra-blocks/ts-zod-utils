@@ -16,6 +16,22 @@ function csv() {
   return csvSchema;
 }
 
+const stringToIntCodec = z.codec(z.string().regex(z.regexes.integer), z.int(), {
+  decode: (str) => Number.parseInt(str, 10),
+  encode: (num) => num.toString(),
+});
+
+/**
+ * A string to integer codec, as defined in Zod's documentation.
+ *
+ * @returns A string to int codec.
+ *
+ * @see https://zod.dev/codecs?id=stringtoint
+ */
+function stringtoInt() {
+  return stringToIntCodec;
+}
+
 /**
  * Returns a type guard function using the provided schema as the source of truth.
  *
@@ -60,6 +76,7 @@ const zu = {
   geojson,
   json,
   csv,
+  stringtoInt,
   typeGuard,
   validate,
 };
