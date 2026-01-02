@@ -24,6 +24,26 @@ describe("zu", () => {
       ]);
     });
   });
+  describe(zu.stringtoInt.name, () => {
+    it("should throw for undefined", () => {
+      expect(() => zu.stringtoInt().parse(undefined)).to.throw();
+    });
+    it("should throw for empty string", () => {
+      expect(() => zu.stringtoInt().parse("")).to.throw();
+    });
+    it("should throw for float string", () => {
+      expect(() => zu.stringtoInt().parse("3.14")).to.throw();
+    });
+    it("should work with negative integer", () => {
+      expect(zu.stringtoInt().parse("-42")).to.equal(-42);
+    });
+    it("should work with 0", () => {
+      expect(zu.stringtoInt().parse("0")).to.equal(0);
+    });
+    it("should work with positive integer", () => {
+      expect(zu.stringtoInt().parse("42")).to.equal(42);
+    });
+  });
   describe(zu.typeGuard.name, () => {
     type Test = z.infer<typeof schema>;
 
