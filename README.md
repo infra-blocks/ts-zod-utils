@@ -10,6 +10,9 @@ This package exposes various utilities extending the [zod](https://www.npmjs.com
 
 - [geojson](#geojson)
 - [json](#json)
+- [csv](#csv)
+- [typeGuard](#type-guard)
+- [validate](#validate)
 
 ### GeoJson
 
@@ -220,3 +223,51 @@ const jsonObject: JsonObject = zu.json.object().parse({ hello: "world" });
 zu.json.object().parse(5); // Boom.
 zu.json.object().parse([]); // Boom.
 ```
+
+### CSV
+
+The `csv` utility is nothing but a shorthand for `z.string().transform(s => s.split(","))`, which
+is commonly written, in my experience. One can stop retyping all those letters and replace them
+with a simple `zu.csv()` call.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+
+const items = zu.csv().parse("one,two,three"); // items is ["one", "two", "three"]
+```
+
+### Type Guard
+
+The `typeGuard` utility allows to obtain a function that will act as a type guard for the type
+that the wrapped schema outputs. It is most useful with branded types, where the information
+about the rules of the type is contained within it. Example:
+
+```typescript
+import { z } from "zod";
+import { zu } from "@infra-blocks/zod-utils";
+import { expectTypeOf } from "expect-type"
+
+export type Min5String = z.infer<typeof schema>;
+
+const schema = z.string().min(5).brand("Min5String");
+const isMin5String = zu.typeGuard(schema);
+const myString = "toto-stfu";
+if (isMin5String(myString)) {
+  // Here, the type of myString extends Min5String (it's actually `"toto-stfu" & z.$brand<"Min5String">`
+  // instead of `string & z.$brand<"Min5String">`)
+  expectTypeOf(myString).toExtend<Min5String>();
+} else {
+  expectTypeOf(myString).toEqual<"toto-stfu">();
+}
+```
+
+It can still be used with vanilla types, but then the guarantees returned by a type guard are
+not as strong. In our specific case, the type guard would assert that `myString` is a `string`,
+despite the fact that it also checked that its length has to be greater than 5. That information
+has been lost.
+
+### Validate
+
+The validate API is very similar to the [type guard](#type-guard) one, except it doesn't bind
+to a schema. The schema is passed as argument. Where you would write `zu.typeGuard(schema)(value)`,
+you instead write `zu.validate(schema, value)`. Both behave the same.

@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-01-02
+
+### Added
+
+- The `typeGuard` and `validate` utility for predicate checks against a schema.
+
 ## [0.5.0] - 2025-12-22
 
 ### Added
@@ -83,6 +89,7 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.6.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.4.5...v0.5.0
 [0.4.5]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.4.4...v0.4.5
 [0.4.4]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.4.3...v0.4.4
