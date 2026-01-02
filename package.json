@@ -1,6 +1,6 @@
 {
   "name": "@infra-blocks/zod-utils",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Extensions to the zod package.",
   "keywords": [
     "zod",
