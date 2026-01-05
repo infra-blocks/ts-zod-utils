@@ -1,7 +1,6 @@
 # ts-zod-utils
 [![Build](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/build.yml/badge.svg)](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/build.yml)
 [![Release](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/release.yml/badge.svg)](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/release.yml)
-[![Update From Template](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/update-from-template.yml/badge.svg)](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/update-from-template.yml)
 [![codecov](https://codecov.io/gh/infra-blocks/ts-zod-utils/graph/badge.svg?token=Q9ZLX7AMPH)](https://codecov.io/gh/infra-blocks/ts-zod-utils)
 
 This package exposes various utilities extending the [zod](https://www.npmjs.com/package/zod) package.
