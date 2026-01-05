@@ -8,11 +8,30 @@ This package exposes various utilities extending the [zod](https://www.npmjs.com
 
 ## API
 
+- [aws](#aws)
 - [geojson](#geojson)
 - [json](#json)
 - [csv](#csv)
 - [typeGuard](#type-guard)
 - [validate](#validate)
+
+### AWS
+
+The `aws` module contains utilities to validate various AWS elements.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+
+// Validates a 12 digit string, as describe here: https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-identifiers.html
+zu.aws.accountId().parse("123456789012");
+// Validates an AWS ARN, as described here: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+zu.aws.arn().parse("arn:aws:iam:us-east-1:123456789012:user/joe-cunt");
+// Validates an AWS partition, as describe here: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+zu.aws.partition().parse("aws");
+// Validates an AWS region, as described here: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html#available-regions
+// "gov" and "cn" regions are included.
+zu.aws.region().parse("us-east-1");
+```
 
 ### GeoJson
 
