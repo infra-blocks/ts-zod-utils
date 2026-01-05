@@ -1,5 +1,6 @@
 import type { TypeGuard } from "@infra-blocks/types";
 import { z } from "zod";
+import { aws } from "./aws/index.js";
 import { geojson } from "./geojson/index.js";
 import { json } from "./json/index.js";
 
@@ -49,7 +50,7 @@ function stringtoInt() {
  */
 function typeGuard<S extends z.ZodType>(schema: S): TypeGuard<z.infer<S>> {
   return (value: unknown): value is z.infer<S> => {
-    return validate(schema, value);
+    return isValid(schema, value);
   };
 }
 
@@ -65,7 +66,7 @@ function typeGuard<S extends z.ZodType>(schema: S): TypeGuard<z.infer<S>> {
  *
  * @returns Whether the value satisfies the schema.
  */
-function validate<S extends z.ZodType>(
+function isValid<S extends z.ZodType>(
   schema: S,
   value: unknown,
 ): value is z.infer<S> {
@@ -73,12 +74,13 @@ function validate<S extends z.ZodType>(
 }
 
 const zu = {
+  aws,
   geojson,
   json,
   csv,
   stringtoInt,
   typeGuard,
-  validate,
+  isValid,
 };
 
 export { zu };

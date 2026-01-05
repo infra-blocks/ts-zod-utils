@@ -1,10 +1,12 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
 import { z } from "zod";
 import { zu } from "../../src/index.js";
+import { injectAwsTests } from "./aws/index.js";
 import { injectGeoJsonTests } from "./geojson/index.js";
 import { injectJsonTests } from "./json/index.js";
 
 describe("zu", () => {
+  injectAwsTests();
   injectGeoJsonTests();
   injectJsonTests();
   describe(zu.csv.name, () => {
