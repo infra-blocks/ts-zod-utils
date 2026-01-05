@@ -12,7 +12,7 @@ This package exposes various utilities extending the [zod](https://www.npmjs.com
 - [json](#json)
 - [csv](#csv)
 - [typeGuard](#type-guard)
-- [validate](#validate)
+- [isValid](#is-valid)
 
 ### AWS
 
@@ -284,8 +284,8 @@ not as strong. In our specific case, the type guard would assert that `myString`
 despite the fact that it also checked that its length has to be greater than 5. That information
 has been lost.
 
-### Validate
+### Is Valid
 
-The validate API is very similar to the [type guard](#type-guard) one, except it doesn't bind
+The `isValid` API is very similar to the [type guard](#type-guard) one, except it doesn't bind
 to a schema. The schema is passed as argument. Where you would write `zu.typeGuard(schema)(value)`,
-you instead write `zu.validate(schema, value)`. Both behave the same.
+you instead write `zu.isValid(schema, value)`. Both behave the same and narrow the result type.

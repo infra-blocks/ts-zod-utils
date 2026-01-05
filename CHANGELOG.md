@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `zu.aws.partition()`, to validate that a string is a valid AWS partition.
   - `zu.aws.region()`, to validate that a string is a valida AWS region.
 
+### Changed
+
+- Rewrote `zu.validate()` as `zu.isValid()`.
+
 ## [0.8.0] - 2026-01-02
 
 ### Added
