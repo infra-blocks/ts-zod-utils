@@ -21,6 +21,11 @@
       "require": "./lib/cjs/index.js",
       "default": "./lib/esm/index.js"
     },
+    "./aws": {
+      "import": "./lib/esm/aws/types.js",
+      "require": "./lib/cjs/index.js",
+      "default": "./lib/esm/aws/types.js"
+    },
     "./json": {
       "import": "./lib/esm/json/types.js",
       "require": "./lib/cjs/json/types.js",

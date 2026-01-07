@@ -1,7 +1,16 @@
-import { expect } from "@infra-blocks/test";
+import { expect, expectTypeOf } from "@infra-blocks/test";
+import type { AwsRegion } from "../../../src/aws/types.js";
 import { zu } from "../../../src/index.js";
 
 export function regionTests() {
+  describe("AwsRegion", () => {
+    it("should be assignable to strings", () => {
+      expectTypeOf<AwsRegion>().toExtend<string>();
+    });
+    it("should not compile with string assignment", () => {
+      expectTypeOf<string>().not.toExtend<AwsRegion>();
+    });
+  });
   describe("region", () => {
     it("should throw for undefined", () => {
       expect(() => zu.aws.region().parse(undefined)).to.throw();
@@ -14,6 +23,7 @@ export function regionTests() {
     });
     it("should work for us-east-1", () => {
       const region = zu.aws.region().parse("us-east-1");
+      expectTypeOf(region).toEqualTypeOf<AwsRegion>();
       expect(region).to.equal("us-east-1");
     });
   });

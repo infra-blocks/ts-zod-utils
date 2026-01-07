@@ -1,6 +1,12 @@
 import { z } from "zod";
 
-const schema = z.string().regex(z.regexes.integer).length(12);
+const schema = z
+  .string()
+  .regex(z.regexes.integer)
+  .length(12)
+  .brand("AwsAccountId");
+
+export type AwsAccountId = z.infer<typeof schema>;
 
 /**
  * Validates that a string is a valid AWS account ID.

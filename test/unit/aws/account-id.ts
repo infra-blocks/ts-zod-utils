@@ -1,8 +1,17 @@
-import { expect } from "@infra-blocks/test";
+import { expect, expectTypeOf } from "@infra-blocks/test";
+import type { AwsAccountId } from "../../../src/aws/types.js";
 import { zu } from "../../../src/index.js";
 
 export function accountIdTests() {
-  describe("account id", () => {
+  describe("AwsAccountId", () => {
+    it("should be assignable to strings", () => {
+      expectTypeOf<AwsAccountId>().toExtend<string>();
+    });
+    it("should not compile with string assignment", () => {
+      expectTypeOf<string>().not.toExtend<AwsAccountId>();
+    });
+  });
+  describe("accountId", () => {
     it("should throw for undefined", () => {
       expect(() => zu.aws.accountId().parse(undefined)).to.throw();
     });
@@ -20,6 +29,7 @@ export function accountIdTests() {
     });
     it("should work for valid 12-digit account ID", () => {
       const accountId = zu.aws.accountId().parse("123456789012");
+      expectTypeOf(accountId).toEqualTypeOf<AwsAccountId>();
       expect(accountId).to.equal("123456789012");
     });
   });

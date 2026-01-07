@@ -41,7 +41,9 @@ const AWS_REGIONS = [
   "us-gov-west-1",
 ] as const;
 
-const schema = z.enum(AWS_REGIONS);
+const schema = z.enum(AWS_REGIONS).brand("AwsRegion");
+
+export type AwsRegion = z.infer<typeof schema>;
 
 /**
  * Validates that a string is a valid AWS region.
