@@ -39,7 +39,12 @@ function isValid(arn: string): boolean {
   return true;
 }
 
-const schema = z.string().refine(isValid, { error: "invalid AWS ARN" });
+const schema = z
+  .string()
+  .refine(isValid, { error: "invalid AWS ARN" })
+  .brand("AwsArn");
+
+export type AwsArn = z.infer<typeof schema>;
 
 /**
  * Validates that a string is a valid AWS ARN.

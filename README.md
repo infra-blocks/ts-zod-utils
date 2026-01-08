@@ -32,6 +32,25 @@ zu.aws.partition().parse("aws");
 zu.aws.region().parse("us-east-1");
 ```
 
+#### Branded types
+
+`aws` utilities that return primitive types are branded. Here is an example with an AWS arn:
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { AwsArn } from "@infra-blocks/zod-utils/aws";
+
+const arn = zu.aws.arn().parse("arn:aws:iam:us-east-1:123456789012:user/joe-cunt"); // The type of arn is AwsArn.
+const splitTokensString = (x: string) => x.split(":");
+// AwsArn is an alias for string & z.$brand<"AwsArn">. All string functionalities are still available.
+splitTokensString(arn);
+const splitTokensArn = (x: AwsArn) => x.split(":");
+// Works as you'd expect.
+splitTokensArn(arn);
+// @ts-expect-error: string is not assignable to AwsArn
+splitTokensArn("arn:aws:iam:us-east-1:123456789012:user/joe-cunt"); // This does not compile, as string is not assignable to AwsArn.
+```
+
 ### GeoJson
 
 The `geojson` module contains utilities to validate GeoJSON objects.

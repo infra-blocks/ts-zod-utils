@@ -2,7 +2,9 @@ import { z } from "zod";
 
 const AWS_PARTITIONS = ["aws", "aws-cn", "aws-us-gov"];
 
-const schema = z.enum(AWS_PARTITIONS);
+const schema = z.enum(AWS_PARTITIONS).brand("AwsPartition");
+
+export type AwsPartition = z.infer<typeof schema>;
 
 /**
  * Validates that a string is a valid AWS partition.
