@@ -32,6 +32,7 @@ export function array() {
   return arraySchema;
 }
 
+// TODO: codec stringToJson.
 export const stringifiedJsonSchema: z.ZodType<Json, string> = z
   .string()
   .transform((str, ctx) => {
