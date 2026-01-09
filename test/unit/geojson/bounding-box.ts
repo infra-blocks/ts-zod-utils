@@ -1,5 +1,5 @@
 import { expect } from "@infra-blocks/test";
-import type { GeoJsonBoundingBox } from "../../../src/geojson/index.js";
+import type { GeoJsonBoundingBox } from "../../../src/geojson/types.js";
 import { zu } from "../../../src/index.js";
 
 export function boundingBoxTests() {

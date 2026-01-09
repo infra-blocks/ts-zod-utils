@@ -5,12 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.1] - 2026-01-09
+
+### Changed
+
+- Reviewed the implementation exporting the `json` and `geojson` module. Used `Object.assign`
+instead of the nested functions approach. This should have no impact on the public API.
+
 ## [0.10.0] - 2026-01-08
 
 ### Changed
 
 - Changed the return types of AWS scalars to branded versions. For example, where `zu.aws.region()`
-used to parse and return a `string`, it now parses a `string` and return an `AwsRegion`, which
+used to parse and return a `string`, it now parses a `string` and returns an `AwsRegion`, which
 is a branded type of the form `string & z.$brand<"AwsRegion">`. It can still be used where strings
 are expected, but variables can now narrow their types directly to a valid AWS region by using
 the alias `AwsRegion`. This has been done for AWS accound IDs, ARNs, partitions and regions.
@@ -125,6 +132,7 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.10.1]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.9.0...v0.10.1
 [0.10.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.7.0...v0.8.0
