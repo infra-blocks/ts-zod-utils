@@ -5,10 +5,19 @@
 
 This package exposes various utilities extending the [zod](https://www.npmjs.com/package/zod) package.
 
+## Branded types
+
+Some schemas return [branded types](https://zod.dev/api?id=branded-types) for extra type safety. When that is the case,
+the documentation will highlight that fact. Otherwise, assume classical structural Typescript as output types.
+
+When branding is used, the brand is a string that's the same as the name of the type. For example, the `AwsAccountId`
+is an alias for `string & z.$brand<"AwsAccountId">`.
+
 ## API
 
 - [aws](#aws)
 - [geojson](#geojson)
+- [iso](#iso)
 - [json](#json)
 - [csv](#csv)
 - [typeGuard](#type-guard)
@@ -16,7 +25,7 @@ This package exposes various utilities extending the [zod](https://www.npmjs.com
 
 ### AWS
 
-The `aws` module contains utilities to validate various AWS elements.
+The `aws` module contains utilities to validate various AWS elements. All schemas return [branded types](#branded-types).
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
@@ -30,25 +39,6 @@ zu.aws.partition().parse("aws");
 // Validates an AWS region, as described here: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html#available-regions
 // "gov" and "cn" regions are included.
 zu.aws.region().parse("us-east-1");
-```
-
-#### Branded types
-
-`aws` utilities that return primitive types are branded. Here is an example with an AWS arn:
-
-```typescript
-import { zu } from "@infra-blocks/zod-utils";
-import { AwsArn } from "@infra-blocks/zod-utils/aws";
-
-const arn = zu.aws.arn().parse("arn:aws:iam:us-east-1:123456789012:user/joe-cunt"); // The type of arn is AwsArn.
-const splitTokensString = (x: string) => x.split(":");
-// AwsArn is an alias for string & z.$brand<"AwsArn">. All string functionalities are still available.
-splitTokensString(arn);
-const splitTokensArn = (x: AwsArn) => x.split(":");
-// Works as you'd expect.
-splitTokensArn(arn);
-// @ts-expect-error: string is not assignable to AwsArn
-splitTokensArn("arn:aws:iam:us-east-1:123456789012:user/joe-cunt"); // This does not compile, as string is not assignable to AwsArn.
 ```
 
 ### GeoJson
@@ -198,6 +188,18 @@ zu.geojson().parse({
 });
 ```
 
+### ISO
+
+The `iso` module is an extension of `zod`'s own `iso` module. All schemas return [branded types](#branded-types).
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import type { IsoCurrencyCode } from "@infra-blocks/zod-utils/iso";
+
+const currency = zu.iso.currencyCode().parse("EUR");
+zu.iso.currencyCode().parse("eur"); // BOOOOOM => currency codes are case sensitive!
+```
+
 ### JSON
 
 The `json` module contains utilities to validate JSON objects and stringified JSON objects.
@@ -282,7 +284,7 @@ about the rules of the type is contained within it. Example:
 ```typescript
 import { z } from "zod";
 import { zu } from "@infra-blocks/zod-utils";
-import { expectTypeOf } from "expect-type"
+import { expectTypeOf } from "expect-type";
 
 export type Min5String = z.infer<typeof schema>;
 
