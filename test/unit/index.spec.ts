@@ -3,10 +3,12 @@ import { z } from "zod";
 import { zu } from "../../src/index.js";
 import { injectAwsTests } from "./aws/index.js";
 import { injectGeoJsonTests } from "./geojson/index.js";
+import { injectIsoTests } from "./iso/index.js";
 import { injectJsonTests } from "./json/index.js";
 
 describe("zu", () => {
   injectAwsTests();
+  injectIsoTests();
   injectGeoJsonTests();
   injectJsonTests();
   describe(zu.csv.name, () => {

@@ -2,6 +2,7 @@ import type { TypeGuard } from "@infra-blocks/types";
 import { z } from "zod";
 import { aws } from "./aws/index.js";
 import { geojson } from "./geojson/index.js";
+import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
 
 const csvSchema = z.string().transform((str) => str.split(","));
@@ -76,6 +77,7 @@ function isValid<S extends z.ZodType>(
 const zu = {
   aws,
   geojson,
+  iso,
   json,
   csv,
   stringtoInt,
