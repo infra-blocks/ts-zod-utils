@@ -2,8 +2,8 @@ import { expect, expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import type { IsoCurrencyCode } from "../../../src/iso/types.js";
 
-export function isoCodeTests() {
-  describe("isoCode", () => {
+export function isoCurrencyCodeTests() {
+  describe("currencyCode", () => {
     it("should throw for invalid currency iso code", () => {
       expect(() => zu.iso.currencyCode().parse("stfu")).to.throw();
     });

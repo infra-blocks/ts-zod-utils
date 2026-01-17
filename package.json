@@ -63,6 +63,7 @@
   "dependencies": {
     "@infra-blocks/types": "^0.24.0",
     "currency-codes": "^2.2.0",
+    "iso-3166": "^4.4.0",
     "zod": "^4.2.1"
   },
   "devDependencies": {

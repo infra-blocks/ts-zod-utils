@@ -194,10 +194,13 @@ The `iso` module is an extension of `zod`'s own `iso` module. All schemas return
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import type { IsoCurrencyCode } from "@infra-blocks/zod-utils/iso";
+import type { IsoCurrencyCode, IsoAlpha3CountryCode } from "@infra-blocks/zod-utils/iso";
 
-const currency = zu.iso.currencyCode().parse("EUR");
-zu.iso.currencyCode().parse("eur"); // BOOOOOM => currency codes are case sensitive!
+zu.iso.currencyCode().parse("USD");
+zu.iso.currencyCode().parse("CAD");
+
+zu.iso.countryCode.alpha3("USA"); // The greatest country on earth.
+zu.iso.countryCode.alpha3("CAN"); // Its communist little brother.
 ```
 
 ### JSON
