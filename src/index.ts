@@ -28,10 +28,26 @@ const stringToIntCodec = z.codec(z.string().regex(z.regexes.integer), z.int(), {
  *
  * @returns A string to int codec.
  *
- * @see https://zod.dev/codecs?id=stringtoint
+ * @see https://zod.dev/codecs#stringtoint
  */
 function stringtoInt() {
   return stringToIntCodec;
+}
+
+const stringToURLCodec = z.codec(z.url(), z.instanceof(URL), {
+  decode: (urlString) => new URL(urlString),
+  encode: (url) => url.href,
+});
+
+/**
+ * A string to URL codec, as defined in Zod's documentation.
+ *
+ * @returns A string to URL codec.
+ *
+ * @see https://zod.dev/codecs#stringtourl
+ */
+function stringToUrl() {
+  return stringToURLCodec;
 }
 
 /**
@@ -81,6 +97,7 @@ const zu = {
   json,
   csv,
   stringtoInt,
+  stringToUrl,
   typeGuard,
   isValid,
 };
