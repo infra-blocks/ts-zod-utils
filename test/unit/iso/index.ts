@@ -1,4 +1,4 @@
-import { isoCodeTests as currencyCodeTests } from "./currency-code.js";
+import { isoCurrencyCodeTests as currencyCodeTests } from "./currency-code.js";
 
 export function injectIsoTests() {
   describe("iso", () => {
