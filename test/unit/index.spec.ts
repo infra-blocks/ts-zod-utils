@@ -48,6 +48,28 @@ describe("zu", () => {
       expect(zu.stringtoInt().parse("42")).to.equal(42);
     });
   });
+  describe(zu.stringToUrl.name, () => {
+    it("should throw for undefined", () => {
+      expect(() => zu.stringToUrl().parse(undefined)).to.throw();
+    });
+    it("should throw for empty string", () => {
+      expect(() => zu.stringToUrl().parse("")).to.throw();
+    });
+    it("should work for sftp URL", () => {
+      const result = zu.stringToUrl().parse("sftp://user:pass@stfu.com");
+      expect(result.protocol).to.equal("sftp:");
+      expect(result.username).to.equal("user");
+      expect(result.password).to.equal("pass");
+      expect(result.hostname).to.equal("stfu.com");
+    });
+    it("should work with HTTP URL", () => {
+      const result = zu.stringToUrl().parse("http://localhost:3000/zod-utils");
+      expect(result.protocol).to.equal("http:");
+      expect(result.hostname).to.equal("localhost");
+      expect(result.port).to.equal("3000");
+      expect(result.pathname).to.equal("/zod-utils");
+    });
+  });
   describe(zu.typeGuard.name, () => {
     type Test = z.infer<typeof schema>;
 
