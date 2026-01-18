@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2026-01-18
+
+### Changed
+
+- `zu.stringToInt` has been renamed to `zu.stringToInteger` and now uses `zu.integer()`
+to produces the final forward type: `Integer`.
+
 ## [0.15.0] - 2026-01-18
 
 ### Added
@@ -171,6 +178,7 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.16.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.13.0...v0.14.0
 [0.13.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.12.0...v0.13.0
