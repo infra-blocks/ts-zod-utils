@@ -1,14 +1,14 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import type { IntegerString } from "../../../src/string/integer.js";
+import { expectSchemaThrow } from "../lib.js";
 
 export function injectIntegerTests() {
-  function expectThrow(value: unknown) {
-    expect(() => zu.string.integer().parse(value)).to.throw();
-  }
+  const schema = zu.string.integer();
+  const expectThrow = expectSchemaThrow(schema);
 
   function expectEquals(value: string) {
-    const result = zu.string.integer().parse(value);
+    const result = schema.parse(value);
     expectTypeOf(result).toEqualTypeOf<IntegerString>();
     expect(result).to.equal(value);
   }

@@ -6,6 +6,7 @@ import { integer } from "./integer.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
 import { string } from "./string/index.js";
+import type { IntegerString } from "./string/integer.js";
 
 const csvSchema = z.string().transform((str) => str.split(","));
 
@@ -18,20 +19,24 @@ function csv() {
   return csvSchema;
 }
 
-const stringToIntCodec = z.codec(z.string().regex(z.regexes.integer), z.int(), {
+const stringToIntegerCodec = z.codec(string.integer(), integer(), {
   decode: (str) => Number.parseInt(str, 10),
-  encode: (num) => num.toString(),
+  encode: (num) => num.toString() as IntegerString,
 });
 
 /**
- * A string to integer codec, as defined in Zod's documentation.
+ * A string to integer codec.
  *
- * @returns A string to int codec.
+ * Same as defined in Zod's documentation, except branding is included using
+ * {@link zu.integer} in place of {@link z.int} and {@link zu.string.integer}
+ * in place of `z.string().regex(z.regexes.integer)`.
+ *
+ * @returns A string to integer codec.
  *
  * @see https://zod.dev/codecs#stringtoint
  */
-function stringtoInt() {
-  return stringToIntCodec;
+function stringtoInteger() {
+  return stringToIntegerCodec;
 }
 
 const stringToURLCodec = z.codec(z.url(), z.instanceof(URL), {
@@ -99,7 +104,7 @@ const zu = {
   csv,
   isValid,
   integer,
-  stringtoInt,
+  stringtoInteger,
   stringToUrl,
   typeGuard,
 };
