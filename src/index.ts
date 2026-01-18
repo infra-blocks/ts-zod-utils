@@ -1,23 +1,13 @@
 import type { TypeGuard } from "@infra-blocks/types";
 import { z } from "zod";
 import { aws } from "./aws/index.js";
+import { csv } from "./csv.js";
 import { geojson } from "./geojson/index.js";
 import { integer } from "./integer.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
 import { string } from "./string/index.js";
 import type { IntegerString } from "./string/integer.js";
-
-const csvSchema = z.string().transform((str) => str.split(","));
-
-/**
- * Returns a string schema that transforms its input using a string split on commas.
- *
- * @returns A CSV schema.
- */
-function csv() {
-  return csvSchema;
-}
 
 const stringToIntegerCodec = z.codec(string.integer(), integer(), {
   decode: (str) => Number.parseInt(str, 10),
