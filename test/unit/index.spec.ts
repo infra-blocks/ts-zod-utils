@@ -2,37 +2,25 @@ import { expect, expectTypeOf } from "@infra-blocks/test";
 import { z } from "zod";
 import { type Integer, zu } from "../../src/index.js";
 import { injectAwsTests } from "./aws/index.js";
+import { injectCsvTests } from "./csv.js";
 import { injectGeoJsonTests } from "./geojson/index.js";
 import { injectIntegerTests } from "./integer.js";
 import { injectIsoTests } from "./iso/index.js";
 import { injectJsonTests } from "./json/index.js";
-import { expectSchemaThrow as expectParseThrows } from "./lib.js";
+import { expectParseThrows } from "./lib.js";
 import { injectStringTests } from "./string/index.js";
 
 describe("zu", () => {
+  // Submodules.
   injectAwsTests();
   injectIntegerTests();
   injectIsoTests();
   injectGeoJsonTests();
   injectJsonTests();
   injectStringTests();
-  describe(zu.csv.name, () => {
-    it("should throw with undefined", () => {
-      expect(() => zu.csv().parse(undefined)).to.throw();
-    });
-    it("should resolve to an array with empty string with an empty string", () => {
-      expect(zu.csv().parse("")).to.deep.equal([""]);
-    });
-    it("should split a comma-separated string", () => {
-      expect(zu.csv().parse("a,b,c")).to.deep.equal(["a", "b", "c"]);
-    });
-    it("should work otherwise with a default value", () => {
-      expect(zu.csv().default(["x", "y"]).parse(undefined)).to.deep.equal([
-        "x",
-        "y",
-      ]);
-    });
-  });
+
+  // Top-level.
+  injectCsvTests();
   describe(zu.stringtoInteger.name, () => {
     const codec = zu.stringtoInteger();
 
