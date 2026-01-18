@@ -13,6 +13,11 @@ the documentation will highlight that fact. Otherwise, assume classical structur
 When branding is used, the brand is a string that's the same as the name of the type. For example, the `AwsAccountId`
 is an alias for `string & z.$brand<"AwsAccountId">`.
 
+One caveat while using branded types schema is that the default value must also be branded (as should be). So,
+for example, where you would write `z.int().default(5)`, you instead have to write `zu.integer().default(zu.integer().parse(5))`.
+This is, however, exactly correct. Indeed, with vanilla zod, you could write `z.int().default(123.456)`, which violates
+the schema and is accepted both at compile time and runtime at the time of this writing.
+
 ## API
 
 - [aws](#aws)
@@ -21,6 +26,7 @@ is an alias for `string & z.$brand<"AwsAccountId">`.
 - [iso](#iso)
 - [json](#json)
 - [csv](#csv)
+- [string](#string)
 - [typeGuard](#type-guard)
 - [isValid](#is-valid)
 
@@ -291,6 +297,23 @@ with a simple `zu.csv()` call.
 import { zu } from "@infra-blocks/zod-utils";
 
 const items = zu.csv().parse("one,two,three"); // items is ["one", "two", "three"]
+```
+
+### String
+
+The `zu.string` module exposes schemas for manipulating strings. All schemas return [branded types](#branded-types).
+
+#### Integer
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { IntegerString } from "@infra-blocks/zod-utils/string";
+import { expectTypeOf } from "expect-type";
+
+// Uses z.string().regex(z.regexes.integer) internally.
+const result = zu.string.integer().parse("1234");
+expectTypeOf(result).toEqualTypeOf<IntegerString>();
+expect(result).to.equal("1234");
 ```
 
 ### Type Guard
