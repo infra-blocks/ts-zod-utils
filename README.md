@@ -17,6 +17,7 @@ is an alias for `string & z.$brand<"AwsAccountId">`.
 
 - [aws](#aws)
 - [geojson](#geojson)
+- [integer](#integer)
 - [iso](#iso)
 - [json](#json)
 - [csv](#csv)
@@ -186,6 +187,20 @@ zu.geojson().parse({
     notJson: new Map()
   }
 });
+```
+
+### Integer
+
+`zu.integer()` produces a [branded type](#branded-types) using `z.int()` internally.
+
+```typescript
+import { zu, Integer } from "@infra-blocks/zod-utils";
+
+function expectsInteger(x: Integer) {
+  // Do some bull here.
+}
+
+expectsInteger(zu.integer().parse(42));
 ```
 
 ### ISO

@@ -2,6 +2,7 @@ import type { TypeGuard } from "@infra-blocks/types";
 import { z } from "zod";
 import { aws } from "./aws/index.js";
 import { geojson } from "./geojson/index.js";
+import { integer } from "./integer.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
 
@@ -96,10 +97,12 @@ const zu = {
   iso,
   json,
   csv,
+  isValid,
+  integer,
   stringtoInt,
   stringToUrl,
   typeGuard,
-  isValid,
 };
 
+export type * from "./types.js";
 export { zu };
