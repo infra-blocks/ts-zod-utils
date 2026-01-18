@@ -6,6 +6,7 @@ import { injectGeoJsonTests } from "./geojson/index.js";
 import { injectIntegerTests } from "./integer.js";
 import { injectIsoTests } from "./iso/index.js";
 import { injectJsonTests } from "./json/index.js";
+import { injectStringTests } from "./string/index.js";
 
 describe("zu", () => {
   injectAwsTests();
@@ -13,6 +14,7 @@ describe("zu", () => {
   injectIsoTests();
   injectGeoJsonTests();
   injectJsonTests();
+  injectStringTests();
   describe(zu.csv.name, () => {
     it("should throw with undefined", () => {
       expect(() => zu.csv().parse(undefined)).to.throw();

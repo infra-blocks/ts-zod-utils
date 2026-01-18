@@ -5,10 +5,9 @@ import { geojson } from "./geojson/index.js";
 import { integer } from "./integer.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
+import { string } from "./string/index.js";
 
 const csvSchema = z.string().transform((str) => str.split(","));
-
-csvSchema.brand("Toto");
 
 /**
  * Returns a string schema that transforms its input using a string split on commas.
@@ -96,6 +95,7 @@ const zu = {
   geojson,
   iso,
   json,
+  string,
   csv,
   isValid,
   integer,

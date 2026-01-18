@@ -40,6 +40,11 @@
       "import": "./lib/esm/geojson/types.js",
       "require": "./lib/cjs/geojson/types.js",
       "default": "./lib/esm/geojson/types.js"
+    },
+    "./string": {
+      "import": "./lib/esm/string/types.js",
+      "require": "./lib/cjs/string/types.js",
+      "default": "./lib/esm/string/types.js"
     }
   },
   "files": [
