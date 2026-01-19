@@ -7,11 +7,15 @@ import { integer } from "./integer.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
 import { string } from "./string/index.js";
-import type { IntegerString } from "./string/integer.js";
+
+// TODO: ts-types.
+function trusted<T>(value: unknown): T {
+  return value as T;
+}
 
 const stringToIntegerCodec = z.codec(string.integer(), integer(), {
   decode: (str) => Number.parseInt(str, 10),
-  encode: (num) => num.toString() as IntegerString,
+  encode: (num) => trusted(num.toString()),
 });
 
 /**
@@ -29,9 +33,9 @@ function stringtoInteger() {
   return stringToIntegerCodec;
 }
 
-const stringToURLCodec = z.codec(z.url(), z.instanceof(URL), {
+const stringToURLCodec = z.codec(string.url(), z.instanceof(URL), {
   decode: (urlString) => new URL(urlString),
-  encode: (url) => url.href,
+  encode: (url) => trusted(url.href),
 });
 
 /**
