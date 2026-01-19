@@ -13,7 +13,7 @@ the documentation will highlight that fact. Otherwise, assume classical structur
 When branding is used, the brand is a string that's the same as the name of the type. For example, the `AwsAccountId`
 is an alias for `string & z.$brand<"AwsAccountId">`.
 
-One caveat while using branded types schema is that the default value must also be branded (as should be). So,
+One caveat of using branded types schema is that the default value must also be branded (as should be). So,
 for example, where you would write `z.int().default(5)`, you instead have to write `zu.integer().default(zu.integer().parse(5))`.
 This is, however, exactly correct. Indeed, with vanilla zod, you could write `z.int().default(123.456)`, which violates
 the schema and is accepted both at compile time and runtime at the time of this writing.
@@ -21,18 +21,18 @@ the schema and is accepted both at compile time and runtime at the time of this 
 ## API
 
 - [aws](#aws)
+- [codec](#codec)
 - [geojson](#geojson)
 - [integer](#integer)
 - [iso](#iso)
 - [json](#json)
-- [csv](#csv)
 - [string](#string)
 - [typeGuard](#type-guard)
 - [isValid](#is-valid)
 
 ### AWS
 
-The `aws` module contains utilities to validate various AWS elements. All schemas return [branded types](#branded-types).
+The `zu.aws` module contains utilities to validate various AWS elements. All schemas return [branded types](#branded-types).
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
@@ -46,6 +46,45 @@ zu.aws.partition().parse("aws");
 // Validates an AWS region, as described here: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html#available-regions
 // "gov" and "cn" regions are included.
 zu.aws.region().parse("us-east-1");
+```
+
+### codec
+
+The `zu.codec` module contains codecs.
+
+#### csv
+
+The `zu.codec.csv()` utility is a codec transforming a string into an array of string using the string `split` method
+to do so.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+
+const items = zu.codec.csv().parse("one,two,three"); // items is ["one", "two", "three"]
+```
+
+#### stringToInteger
+
+The `zu.codec.stringToInteger()` codec is taken almost verbatim
+from [Zod's own documentation](https://zod.dev/codecs#stringtoint). The
+only difference is the final type is branded as it is using `zu.integer()` internally.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { Integer } from "@infra-blocks/zod-utils";
+
+const item: Integer = zu.codec.stringToInteger().parse("1234");
+```
+
+#### stringToUrl
+
+The `zu.codec.stringToUrl()` codec is taken [Zod's own documentation](https://zod.dev/codecs#stringtourl).
+The result is a URL object. No branding here esé.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+
+const item: URL = zu.codec.stringToUrl().parse("http://localhost:3000");
 ```
 
 ### GeoJson
@@ -285,18 +324,6 @@ const jsonObject: JsonObject = zu.json.object().parse({ hello: "world" });
 // You know it by now, but just to make sure.
 zu.json.object().parse(5); // Boom.
 zu.json.object().parse([]); // Boom.
-```
-
-### CSV
-
-The `csv` utility is nothing but a shorthand for `z.string().transform(s => s.split(","))`, which
-is commonly written, in my experience. One can stop retyping all those letters and replace them
-with a simple `zu.csv()` call.
-
-```typescript
-import { zu } from "@infra-blocks/zod-utils";
-
-const items = zu.csv().parse("one,two,three"); // items is ["one", "two", "three"]
 ```
 
 ### String
