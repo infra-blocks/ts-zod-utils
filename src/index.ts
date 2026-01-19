@@ -1,53 +1,12 @@
 import type { TypeGuard } from "@infra-blocks/types";
-import { z } from "zod";
+import type { z } from "zod";
 import { aws } from "./aws/index.js";
-import { csv } from "./csv.js";
+import { codec } from "./codec/index.js";
 import { geojson } from "./geojson/index.js";
 import { integer } from "./integer.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
 import { string } from "./string/index.js";
-
-// TODO: ts-types.
-function trusted<T>(value: unknown): T {
-  return value as T;
-}
-
-const stringToIntegerCodec = z.codec(string.integer(), integer(), {
-  decode: (str) => Number.parseInt(str, 10),
-  encode: (num) => trusted(num.toString()),
-});
-
-/**
- * A string to integer codec.
- *
- * Same as defined in Zod's documentation, except branding is included using
- * {@link zu.integer} in place of {@link z.int} and {@link zu.string.integer}
- * in place of `z.string().regex(z.regexes.integer)`.
- *
- * @returns A string to integer codec.
- *
- * @see https://zod.dev/codecs#stringtoint
- */
-function stringtoInteger() {
-  return stringToIntegerCodec;
-}
-
-const stringToURLCodec = z.codec(string.url(), z.instanceof(URL), {
-  decode: (urlString) => new URL(urlString),
-  encode: (url) => trusted(url.href),
-});
-
-/**
- * A string to URL codec, as defined in Zod's documentation.
- *
- * @returns A string to URL codec.
- *
- * @see https://zod.dev/codecs#stringtourl
- */
-function stringToUrl() {
-  return stringToURLCodec;
-}
 
 /**
  * Returns a type guard function using the provided schema as the source of truth.
@@ -91,15 +50,13 @@ function isValid<S extends z.ZodType>(
 
 const zu = {
   aws,
+  codec,
   geojson,
   iso,
   json,
   string,
-  csv,
   isValid,
   integer,
-  stringtoInteger,
-  stringToUrl,
   typeGuard,
 };
 

@@ -1,95 +1,24 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
 import { z } from "zod";
-import { type Integer, zu } from "../../src/index.js";
+import { zu } from "../../src/index.js";
 import { injectAwsTests } from "./aws/index.js";
-import { injectCsvTests } from "./csv.js";
+import { injectCodecTests } from "./codec/index.js";
 import { injectGeoJsonTests } from "./geojson/index.js";
 import { injectIntegerTests } from "./integer.js";
 import { injectIsoTests } from "./iso/index.js";
 import { injectJsonTests } from "./json/index.js";
-import { expectParseThrows } from "./lib.js";
 import { injectStringTests } from "./string/index.js";
 
 describe("zu", () => {
   // Submodules.
   injectAwsTests();
+  injectCodecTests();
   injectIntegerTests();
   injectIsoTests();
   injectGeoJsonTests();
   injectJsonTests();
   injectStringTests();
 
-  // Top-level.
-  injectCsvTests();
-  describe(zu.stringtoInteger.name, () => {
-    const codec = zu.stringtoInteger();
-
-    describe("parse", () => {
-      const expectThrow = expectParseThrows(codec);
-
-      function expectSuccess(value: number) {
-        const result = codec.parse(value.toString(10));
-        expectTypeOf(result).toEqualTypeOf<Integer>();
-        expect(result).to.equal(value);
-      }
-
-      it("should throw for undefined", () => {
-        expectThrow(undefined);
-      });
-      it("should throw for empty string", () => {
-        expectThrow("");
-      });
-      it("should throw for float string", () => {
-        expectThrow("3.14");
-      });
-      it("should work with negative integer", () => {
-        expectSuccess(-42);
-      });
-      it("should work with 0", () => {
-        expectSuccess(0);
-      });
-      it("should work with positive integer", () => {
-        expectSuccess(42);
-      });
-    });
-    describe("decode", () => {
-      it("should work with strings as input", () => {
-        const result = codec.decode("1234");
-        expectTypeOf(result).toEqualTypeOf<Integer>();
-        expect(result).to.equal(1234);
-      });
-    });
-    describe("encode", () => {
-      it("should work with Integer as input and produce string as output", () => {
-        const decoded = codec.decode("1234");
-        const result = codec.encode(decoded);
-        expectTypeOf(result).toEqualTypeOf<string>();
-        expect(result).to.equal("1234");
-      });
-    });
-  });
-  describe(zu.stringToUrl.name, () => {
-    it("should throw for undefined", () => {
-      expect(() => zu.stringToUrl().parse(undefined)).to.throw();
-    });
-    it("should throw for empty string", () => {
-      expect(() => zu.stringToUrl().parse("")).to.throw();
-    });
-    it("should work for sftp URL", () => {
-      const result = zu.stringToUrl().parse("sftp://user:pass@stfu.com");
-      expect(result.protocol).to.equal("sftp:");
-      expect(result.username).to.equal("user");
-      expect(result.password).to.equal("pass");
-      expect(result.hostname).to.equal("stfu.com");
-    });
-    it("should work with HTTP URL", () => {
-      const result = zu.stringToUrl().parse("http://localhost:3000/zod-utils");
-      expect(result.protocol).to.equal("http:");
-      expect(result.hostname).to.equal("localhost");
-      expect(result.port).to.equal("3000");
-      expect(result.pathname).to.equal("/zod-utils");
-    });
-  });
   describe(zu.typeGuard.name, () => {
     type Test = z.infer<typeof schema>;
 

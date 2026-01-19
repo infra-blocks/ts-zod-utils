@@ -1,21 +1,23 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
-import { zu } from "../../src/index.js";
-import { expectParseThrows } from "./lib.js";
+import { zu } from "../../../src/index.js";
+import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectCsvTests() {
-  describe(zu.csv.name, () => {
-    const codec = zu.csv();
-    const expectThrow = expectParseThrows(codec);
+  describe(zu.codec.csv.name, () => {
+    const codec = zu.codec.csv();
 
     describe("parse", () => {
+      const expectThrows = expectParseThrows(codec);
+      const expectWorks = expectParseEquals(codec);
+
       it("should throw with undefined", () => {
-        expectThrow(undefined);
+        expectThrows(undefined);
       });
       it("should resolve to an array with empty string with an empty string", () => {
-        expect(codec.parse("")).to.deep.equal([""]);
+        expectWorks("", [""]);
       });
       it("should split a comma-separated string", () => {
-        expect(codec.parse("a,b,c")).to.deep.equal(["a", "b", "c"]);
+        expectWorks("a,b,c", ["a", "b", "c"]);
       });
     });
     describe("decode", () => {
