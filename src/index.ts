@@ -3,9 +3,9 @@ import type { z } from "zod";
 import { aws } from "./aws/index.js";
 import { codec } from "./codec/index.js";
 import { geojson } from "./geojson/index.js";
-import { integer } from "./integer.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
+import { number } from "./number/index.js";
 import { string } from "./string/index.js";
 
 /**
@@ -54,11 +54,10 @@ const zu = {
   geojson,
   iso,
   json,
+  number,
   string,
   isValid,
-  integer,
   typeGuard,
 };
 
-export type * from "./types.js";
 export { zu };

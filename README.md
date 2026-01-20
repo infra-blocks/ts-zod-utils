@@ -23,14 +23,14 @@ the schema and is accepted both at compile time and runtime at the time of this 
 - [aws](#aws)
 - [codec](#codec)
 - [geojson](#geojson)
-- [integer](#integer)
 - [iso](#iso)
 - [json](#json)
+- [number](#number)
 - [string](#string)
 - [typeGuard](#type-guard)
 - [isValid](#is-valid)
 
-### AWS
+### aws
 
 The `zu.aws` module contains utilities to validate various AWS elements. All schemas return [branded types](#branded-types).
 
@@ -87,7 +87,7 @@ import { zu } from "@infra-blocks/zod-utils";
 const item: URL = zu.codec.stringToUrl().parse("http://localhost:3000");
 ```
 
-### GeoJson
+### geojson
 
 The `geojson` module contains utilities to validate GeoJSON objects.
 
@@ -234,21 +234,7 @@ zu.geojson().parse({
 });
 ```
 
-### Integer
-
-`zu.integer()` produces a [branded type](#branded-types) using `z.int()` internally.
-
-```typescript
-import { zu, Integer } from "@infra-blocks/zod-utils";
-
-function expectsInteger(x: Integer) {
-  // Do some bull here.
-}
-
-expectsInteger(zu.integer().parse(42));
-```
-
-### ISO
+### iso
 
 The `iso` module is an extension of `zod`'s own `iso` module. All schemas return [branded types](#branded-types).
 
@@ -263,7 +249,7 @@ zu.iso.countryCode.alpha3("USA"); // The greatest country on earth.
 zu.iso.countryCode.alpha3("CAN"); // Its communist little brother.
 ```
 
-### JSON
+### json
 
 The `json` module contains utilities to validate JSON objects and stringified JSON objects.
 
@@ -326,11 +312,30 @@ zu.json.object().parse(5); // Boom.
 zu.json.object().parse([]); // Boom.
 ```
 
-### String
+### number
+
+The `zu.number` module exports utilities for parsing numbers. All schemas return [branded types](#branded-types).
+
+#### integer
+
+`zu.number.integer()` produces a [branded type](#branded-types) using `z.int()` internally.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { Integer } from "@infra-blocks/zod-utils/number";
+
+function expectsInteger(x: Integer) {
+  // Do some bull here.
+}
+
+expectsInteger(zu.number.integer().parse(42));
+```
+
+### string
 
 The `zu.string` module exposes schemas for manipulating strings. All schemas return [branded types](#branded-types).
 
-#### Integer
+#### integer
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";

@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { zu } from "../index.js";
-import { integer } from "../integer.js";
 import { trusted } from "../lib.js";
+import { number } from "../number/index.js";
 import { string } from "../string/index.js";
 
-const stringToIntegerCodec = z.codec(string.integer(), integer(), {
+const stringToIntegerCodec = z.codec(string.integer(), number.integer(), {
   decode: (str) => Number.parseInt(str, 10),
   encode: (num) => trusted(num.toString()),
 });

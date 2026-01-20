@@ -4,19 +4,19 @@ import { zu } from "../../src/index.js";
 import { injectAwsTests } from "./aws/index.js";
 import { injectCodecTests } from "./codec/index.js";
 import { injectGeoJsonTests } from "./geojson/index.js";
-import { injectIntegerTests } from "./integer.js";
 import { injectIsoTests } from "./iso/index.js";
 import { injectJsonTests } from "./json/index.js";
+import { injectNumberTests } from "./number/index.js";
 import { injectStringTests } from "./string/index.js";
 
 describe("zu", () => {
   // Submodules.
   injectAwsTests();
   injectCodecTests();
-  injectIntegerTests();
-  injectIsoTests();
   injectGeoJsonTests();
+  injectIsoTests();
   injectJsonTests();
+  injectNumberTests();
   injectStringTests();
 
   describe(zu.typeGuard.name, () => {
