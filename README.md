@@ -3,7 +3,9 @@
 [![Release](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/release.yml/badge.svg)](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/infra-blocks/ts-zod-utils/graph/badge.svg?token=Q9ZLX7AMPH)](https://codecov.io/gh/infra-blocks/ts-zod-utils)
 
-This package exposes various utilities extending the [zod](https://www.npmjs.com/package/zod) package.
+[zod](https://www.npmjs.com/package/zod) is an amazing parsing library. This package aims to extend it with various utilities
+that I've found useful through my own programming. Those include schemas I find myself writing often, codecs that are
+shown in Zod's documentation but not yet available, and type utilities.
 
 ## Branded types
 
@@ -14,9 +16,9 @@ When branding is used, the brand is a string that's the same as the name of the 
 is an alias for `string & z.$brand<"AwsAccountId">`.
 
 One caveat of using branded types schema is that the default value must also be branded (as should be). So,
-for example, where you would write `z.int().default(5)`, you instead have to write `zu.integer().default(zu.integer().parse(5))`.
-This is, however, exactly correct. Indeed, with vanilla zod, you could write `z.int().default(123.456)`, which violates
-the schema and is accepted both at compile time and runtime at the time of this writing.
+for example, where you would write `z.int().default(5)`, you instead have to write `zu.number.integer().default(zu.number.integer().parse(5))`.
+This example also highlights an inconsistency with Zod where you can have `z.int().default(123.456)`, which both
+compiles and runs successfully.
 
 ## API
 
@@ -372,11 +374,6 @@ if (isMin5String(myString)) {
   expectTypeOf(myString).toEqual<"toto-stfu">();
 }
 ```
-
-It can still be used with vanilla types, but then the guarantees returned by a type guard are
-not as strong. In our specific case, the type guard would assert that `myString` is a `string`,
-despite the fact that it also checked that its length has to be greater than 5. That information
-has been lost.
 
 ### Is Valid
 
