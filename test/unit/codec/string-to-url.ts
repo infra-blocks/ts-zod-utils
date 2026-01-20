@@ -1,30 +1,8 @@
+import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectStringToUrlTests() {
-  // describe("decode", () => {
-  //   it("should require a string as input", () => {
-  //     // @ts-expect-error string required
-  //     expect(() => codec.decode(1)).to.throw();
-  //   });
-  //   it("should work with valid string input", () => {
-  //     expect(codec.decode("a,b,c")).to.deep.equal(["a", "b", "c"]);
-  //   });
-  // });
-  // describe("encode", () => {
-  //   it("should require a string array as input", () => {
-  //     // @ts-expect-error string array required.
-  //     expect(() => codec.encode(["1", 2, "3"])).to.throw();
-  //   });
-  //   it("should give back a string with a valid string array", () => {
-  //     const decoded = codec.decode("a,b,c");
-  //     expectTypeOf(decoded).toEqualTypeOf<Array<string>>();
-  //     const result = codec.encode(decoded);
-  //     expect(result).to.equal("a,b,c");
-  //     expectTypeOf(result).toEqualTypeOf<string>();
-  //   });
-  // });
-
   describe(zu.codec.stringToUrl.name, () => {
     const codec = zu.codec.stringToUrl();
 
@@ -47,6 +25,27 @@ export function injectStringToUrlTests() {
         expectWorks(input, new URL(input));
       });
     });
-    // TODO codec tests
+    describe("decode", () => {
+      it("should require a string as input", () => {
+        // @ts-expect-error string required
+        expect(() => codec.decode(1)).to.throw();
+      });
+      it("should work with valid string input", () => {
+        const url = "https://www.snoodle.cunt";
+        expect(codec.decode(url)).to.deep.equal(new URL(url));
+      });
+    });
+    describe("encode", () => {
+      it("should require URL as input", () => {
+        // @ts-expect-error URL required.
+        expect(() => codec.encode()).to.throw();
+      });
+      it("should give back a valid url string", () => {
+        const url = "sftp://user:pass@localhost:3000";
+        const decoded = codec.decode(url);
+        const result = codec.encode(decoded);
+        expect(result).to.equal(url);
+      });
+    });
   });
 }

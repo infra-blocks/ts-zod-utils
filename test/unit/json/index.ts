@@ -1,7 +1,6 @@
 import { injectArrayTests } from "./array.js";
 import { injectObjectTests } from "./object.js";
 import { injectPrimitiveTests } from "./primitive.js";
-import { injectStringifiedTests } from "./stringified.js";
 import { injectJsonValueTests } from "./value.js";
 
 export function injectJsonTests() {
@@ -10,6 +9,5 @@ export function injectJsonTests() {
     injectArrayTests();
     injectObjectTests();
     injectJsonValueTests();
-    injectStringifiedTests();
   });
 }

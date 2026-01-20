@@ -78,6 +78,17 @@ import { Integer } from "@infra-blocks/zod-utils";
 const item: Integer = zu.codec.stringToInteger().parse("1234");
 ```
 
+#### stringToJson
+
+The `zu.codec.stringToJson()` codec transforms a string into JSON using JSON.parse.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import type { Json } from "@infra-blocks/zod-utils/json";
+
+const item: Json = zu.codec.stringToJson().parse('[1, "word", null]');
+```
+
 #### stringToUrl
 
 The `zu.codec.stringToUrl()` codec is taken [Zod's own documentation](https://zod.dev/codecs#stringtourl).
@@ -253,7 +264,7 @@ zu.iso.countryCode.alpha3("CAN"); // Its communist little brother.
 
 ### json
 
-The `json` module contains utilities to validate JSON objects and stringified JSON objects.
+The `json` module contains utilities to validate JSON objects, arrays and primitives.
 
 ````typescript
 import { zu } from "@infra-blocks/zod-utils";
@@ -280,11 +291,6 @@ zu.json().parse(undefined); // Boom.
 zu.json().parse(Symbol("nope")); // Boom.
 zu.json().parse(new Set()); // Boom.
 // etc...
-
-// You can also parse stringified JSON!
-zu.json.stringified().parse("5"); // Returns the number 5.
-zu.json.stringified().parse('"JSON string"'); // Returns "JSON string". Note the quotes were removed.
-zu.json.stringified().parse(JSON.strinfify({ field: "value" })); // Returns {field: "value"}.
 ````
 
 #### Sub schemas & Types
@@ -348,6 +354,18 @@ import { expectTypeOf } from "expect-type";
 const result = zu.string.integer().parse("1234");
 expectTypeOf(result).toEqualTypeOf<IntegerString>();
 expect(result).to.equal("1234");
+```
+
+#### json
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { JsonString } from "@infra-blocks/zod-utils/string";
+import { expectTypeOf } from "expect-type";
+
+const result = zu.string.json().parse('[1, "word", null]');
+expectTypeOf(result).toEqualTypeOf<UrlString>();
+expect(result).to.equal('[1, "word", null]');
 ```
 
 ### Type Guard

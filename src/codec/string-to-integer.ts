@@ -4,7 +4,7 @@ import { trusted } from "../lib.js";
 import { number } from "../number/index.js";
 import { string } from "../string/index.js";
 
-const stringToIntegerCodec = z.codec(string.integer(), number.integer(), {
+const codec = z.codec(string.integer(), number.integer(), {
   decode: (str) => Number.parseInt(str, 10),
   encode: (num) => trusted(num.toString()),
 });
@@ -20,4 +20,4 @@ const stringToIntegerCodec = z.codec(string.integer(), number.integer(), {
  *
  * @see https://zod.dev/codecs#stringtoint
  */
-export const stringtoInteger = () => stringToIntegerCodec;
+export const stringtoInteger = () => codec;

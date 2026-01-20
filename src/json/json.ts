@@ -10,19 +10,3 @@ const schema: z.ZodType<Json> = z.lazy(() =>
 export type Json = JsonPrimitive | JsonObject | JsonArray;
 
 export const json = () => schema;
-
-// TODO: codec stringToJson.
-export const stringifiedJsonSchema: z.ZodType<Json, string> = z
-  .string()
-  .transform((str, ctx) => {
-    try {
-      return JSON.parse(str) as Json;
-    } catch {
-      ctx.addIssue({ code: "custom", message: "Invalid JSON" });
-      return z.NEVER;
-    }
-  });
-
-export function stringifiedJson() {
-  return stringifiedJsonSchema;
-}
