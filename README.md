@@ -381,6 +381,19 @@ expectTypeOf(result).toEqualTypeOf<UrlString>();
 expect(result).to.equal('[1, "word", null]');
 ```
 
+#### number
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { NumberString } from "@infra-blocks/zod-utils/string";
+import { expectTypeOf } from "expect-type";
+
+// Uses z.string().regex(z.regexes.number) internally.
+const result = zu.string.integer().parse("1234.5678");
+expectTypeOf(result).toEqualTypeOf<NumberString>();
+expect(result).to.equal("1234.5678");
+```
+
 ### Type Guard
 
 The `typeGuard` utility allows to obtain a function that will act as a type guard for the type
