@@ -57,7 +57,7 @@ The `zu.codec` module contains codecs.
 #### csv
 
 The `zu.codec.csv()` utility is a codec transforming a string into an array of string using the string `split` method
-to do so.
+to do so. It uses `zu.codec.stringSplit(",")` internally.
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
@@ -70,6 +70,12 @@ const items = zu.codec.csv().parse("one,two,three"); // items is ["one", "two", 
 The `zu.codec.jsonParse(schema)` utility is a factory returning a codec where the first schema is
 `zu.string.json()` and the second one is the one provided as input. This is almost verbatim
 what is describe in [Zod's documentation](https://zod.dev/codecs#jsonschema).
+
+#### stringSplit
+
+The `zu.codec.stringSplit(separator)` utility is a factory returning a codec where the first schema is
+`z.string()`, the second schema is `z.array(z.string())`, and the transformations back and forth
+are accomplished using `String.split` and `Array.join` respectively, using the provided separator.
 
 #### stringToInteger
 

@@ -12,11 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `zu.string.json()` with branded type `JsonString`.
 - `zu.codec.jsonParse(schema)`, a codec factory that first transforms the string input
 using JSON.parse, then forwards the validation to the provided schema.
+- `zu.codec.stringSplit(separator)`, a codec factory that splits and joins using the
+provided separator.
 
 ### Changed
 
 - Moved `zu.json.stringified()` to `zu.codec.stringToJson()`, and made it a codec! The
 codec uses `zu.codec.jsonParse(json())` internally.
+
+### Fixed
+
+- Fixed the naming of `zu.codec.stringtoInteger` to `zu.codec.stringToInteger`.
 
 ## [0.20.0] - 2026-01-20
 

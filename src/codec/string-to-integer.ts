@@ -20,4 +20,4 @@ const codec = z.codec(string.integer(), number.integer(), {
  *
  * @see https://zod.dev/codecs#stringtoint
  */
-export const stringtoInteger = () => codec;
+export const stringToInteger = () => codec;
