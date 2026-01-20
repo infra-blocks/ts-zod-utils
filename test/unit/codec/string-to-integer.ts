@@ -1,5 +1,6 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
-import { type Integer, zu } from "../../../src/index.js";
+import { zu } from "../../../src/index.js";
+import type { Integer } from "../../../src/number/types.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectStringToIntegerTests() {

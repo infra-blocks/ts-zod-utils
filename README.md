@@ -3,7 +3,9 @@
 [![Release](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/release.yml/badge.svg)](https://github.com/infra-blocks/ts-zod-utils/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/infra-blocks/ts-zod-utils/graph/badge.svg?token=Q9ZLX7AMPH)](https://codecov.io/gh/infra-blocks/ts-zod-utils)
 
-This package exposes various utilities extending the [zod](https://www.npmjs.com/package/zod) package.
+[zod](https://www.npmjs.com/package/zod) is an amazing parsing library. This package aims to extend it with various utilities
+that I've found useful through my own programming. Those include schemas I find myself writing often, codecs that are
+shown in Zod's documentation but not yet available, and type utilities.
 
 ## Branded types
 
@@ -14,23 +16,23 @@ When branding is used, the brand is a string that's the same as the name of the 
 is an alias for `string & z.$brand<"AwsAccountId">`.
 
 One caveat of using branded types schema is that the default value must also be branded (as should be). So,
-for example, where you would write `z.int().default(5)`, you instead have to write `zu.integer().default(zu.integer().parse(5))`.
-This is, however, exactly correct. Indeed, with vanilla zod, you could write `z.int().default(123.456)`, which violates
-the schema and is accepted both at compile time and runtime at the time of this writing.
+for example, where you would write `z.int().default(5)`, you instead have to write `zu.number.integer().default(zu.number.integer().parse(5))`.
+This example also highlights an inconsistency with Zod where you can have `z.int().default(123.456)`, which both
+compiles and runs successfully.
 
 ## API
 
 - [aws](#aws)
 - [codec](#codec)
 - [geojson](#geojson)
-- [integer](#integer)
 - [iso](#iso)
 - [json](#json)
+- [number](#number)
 - [string](#string)
 - [typeGuard](#type-guard)
 - [isValid](#is-valid)
 
-### AWS
+### aws
 
 The `zu.aws` module contains utilities to validate various AWS elements. All schemas return [branded types](#branded-types).
 
@@ -87,7 +89,7 @@ import { zu } from "@infra-blocks/zod-utils";
 const item: URL = zu.codec.stringToUrl().parse("http://localhost:3000");
 ```
 
-### GeoJson
+### geojson
 
 The `geojson` module contains utilities to validate GeoJSON objects.
 
@@ -234,21 +236,7 @@ zu.geojson().parse({
 });
 ```
 
-### Integer
-
-`zu.integer()` produces a [branded type](#branded-types) using `z.int()` internally.
-
-```typescript
-import { zu, Integer } from "@infra-blocks/zod-utils";
-
-function expectsInteger(x: Integer) {
-  // Do some bull here.
-}
-
-expectsInteger(zu.integer().parse(42));
-```
-
-### ISO
+### iso
 
 The `iso` module is an extension of `zod`'s own `iso` module. All schemas return [branded types](#branded-types).
 
@@ -263,7 +251,7 @@ zu.iso.countryCode.alpha3("USA"); // The greatest country on earth.
 zu.iso.countryCode.alpha3("CAN"); // Its communist little brother.
 ```
 
-### JSON
+### json
 
 The `json` module contains utilities to validate JSON objects and stringified JSON objects.
 
@@ -326,11 +314,30 @@ zu.json.object().parse(5); // Boom.
 zu.json.object().parse([]); // Boom.
 ```
 
-### String
+### number
+
+The `zu.number` module exports utilities for parsing numbers. All schemas return [branded types](#branded-types).
+
+#### integer
+
+`zu.number.integer()` produces a [branded type](#branded-types) using `z.int()` internally.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { Integer } from "@infra-blocks/zod-utils/number";
+
+function expectsInteger(x: Integer) {
+  // Do some bull here.
+}
+
+expectsInteger(zu.number.integer().parse(42));
+```
+
+### string
 
 The `zu.string` module exposes schemas for manipulating strings. All schemas return [branded types](#branded-types).
 
-#### Integer
+#### integer
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
@@ -367,11 +374,6 @@ if (isMin5String(myString)) {
   expectTypeOf(myString).toEqual<"toto-stfu">();
 }
 ```
-
-It can still be used with vanilla types, but then the guarantees returned by a type guard are
-not as strong. In our specific case, the type guard would assert that `myString` is a `string`,
-despite the fact that it also checked that its length has to be greater than 5. That information
-has been lost.
 
 ### Is Valid
 
