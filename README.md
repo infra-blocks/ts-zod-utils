@@ -57,13 +57,25 @@ The `zu.codec` module contains codecs.
 #### csv
 
 The `zu.codec.csv()` utility is a codec transforming a string into an array of string using the string `split` method
-to do so.
+to do so. It uses `zu.codec.stringSplit(",")` internally.
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
 
 const items = zu.codec.csv().parse("one,two,three"); // items is ["one", "two", "three"]
 ```
+
+#### jsonParse
+
+The `zu.codec.jsonParse(schema)` utility is a factory returning a codec where the first schema is
+`zu.string.json()` and the second one is the one provided as input. This is almost verbatim
+what is describe in [Zod's documentation](https://zod.dev/codecs#jsonschema).
+
+#### stringSplit
+
+The `zu.codec.stringSplit(separator)` utility is a factory returning a codec where the first schema is
+`z.string()`, the second schema is `z.array(z.string())`, and the transformations back and forth
+are accomplished using `String.split` and `Array.join` respectively, using the provided separator.
 
 #### stringToInteger
 
@@ -76,6 +88,18 @@ import { zu } from "@infra-blocks/zod-utils";
 import { Integer } from "@infra-blocks/zod-utils";
 
 const item: Integer = zu.codec.stringToInteger().parse("1234");
+```
+
+#### stringToJson
+
+The `zu.codec.stringToJson()` codec transforms a string into JSON using JSON.parse.
+It uses `zu.codec.jsonParse(zu.json())` internally.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import type { Json } from "@infra-blocks/zod-utils/json";
+
+const item: Json = zu.codec.stringToJson().parse('[1, "word", null]');
 ```
 
 #### stringToUrl
@@ -253,7 +277,7 @@ zu.iso.countryCode.alpha3("CAN"); // Its communist little brother.
 
 ### json
 
-The `json` module contains utilities to validate JSON objects and stringified JSON objects.
+The `json` module contains utilities to validate JSON objects, arrays and primitives.
 
 ````typescript
 import { zu } from "@infra-blocks/zod-utils";
@@ -280,11 +304,6 @@ zu.json().parse(undefined); // Boom.
 zu.json().parse(Symbol("nope")); // Boom.
 zu.json().parse(new Set()); // Boom.
 // etc...
-
-// You can also parse stringified JSON!
-zu.json.stringified().parse("5"); // Returns the number 5.
-zu.json.stringified().parse('"JSON string"'); // Returns "JSON string". Note the quotes were removed.
-zu.json.stringified().parse(JSON.strinfify({ field: "value" })); // Returns {field: "value"}.
 ````
 
 #### Sub schemas & Types
@@ -348,6 +367,18 @@ import { expectTypeOf } from "expect-type";
 const result = zu.string.integer().parse("1234");
 expectTypeOf(result).toEqualTypeOf<IntegerString>();
 expect(result).to.equal("1234");
+```
+
+#### json
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { JsonString } from "@infra-blocks/zod-utils/string";
+import { expectTypeOf } from "expect-type";
+
+const result = zu.string.json().parse('[1, "word", null]');
+expectTypeOf(result).toEqualTypeOf<UrlString>();
+expect(result).to.equal('[1, "word", null]');
 ```
 
 ### Type Guard

@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.21.0] - 2026-01-21
+
+### Added
+
+- `zu.string.json()` with branded type `JsonString`.
+- `zu.codec.jsonParse(schema)`, a codec factory that first transforms the string input
+using JSON.parse, then forwards the validation to the provided schema.
+- `zu.codec.stringSplit(separator)`, a codec factory that splits and joins using the
+provided separator.
+
+### Changed
+
+- Moved `zu.json.stringified()` to `zu.codec.stringToJson()`, and made it a codec! The
+codec uses `zu.codec.jsonParse(json())` internally.
+
+### Fixed
+
+- Fixed the naming of `zu.codec.stringtoInteger` to `zu.codec.stringToInteger`.
+
 ## [0.20.0] - 2026-01-20
 
 ### Changed
@@ -205,6 +224,7 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.21.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.20.0...v0.21.0
 [0.20.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.18.0...v0.19.0
 [0.18.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.17.0...v0.18.0

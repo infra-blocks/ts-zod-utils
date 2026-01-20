@@ -1,10 +1,14 @@
 import { csv } from "./csv.js";
-import { stringtoInteger } from "./string-to-integer.js";
+import { jsonParse } from "./json-parse.js";
+import { stringToInteger } from "./string-to-integer.js";
+import { stringToJson } from "./string-to-json.js";
 import { stringToUrl } from "./string-to-url.js";
 
 const codec = {
   csv,
-  stringtoInteger,
+  jsonParse,
+  stringtoInteger: stringToInteger,
+  stringToJson,
   stringToUrl,
 };
 

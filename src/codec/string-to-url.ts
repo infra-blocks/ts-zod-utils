@@ -2,7 +2,7 @@ import { z } from "zod";
 import { trusted } from "../lib.js";
 import { string } from "../string/index.js";
 
-const stringToURLCodec = z.codec(string.url(), z.instanceof(URL), {
+const codec = z.codec(string.url(), z.instanceof(URL), {
   decode: (urlString) => new URL(urlString),
   encode: (url) => trusted(url.href),
 });
@@ -14,4 +14,4 @@ const stringToURLCodec = z.codec(string.url(), z.instanceof(URL), {
  *
  * @see https://zod.dev/codecs#stringtourl
  */
-export const stringToUrl = () => stringToURLCodec;
+export const stringToUrl = () => codec;
