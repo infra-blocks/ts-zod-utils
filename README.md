@@ -65,6 +65,12 @@ import { zu } from "@infra-blocks/zod-utils";
 const items = zu.codec.csv().parse("one,two,three"); // items is ["one", "two", "three"]
 ```
 
+#### jsonParse
+
+The `zu.codec.jsonParse(schema)` utility is a factory returning a codec where the first schema is
+`zu.string.json()` and the second one is the one provided as input. This is almost verbatim
+what is describe in [Zod's documentation](https://zod.dev/codecs#jsonschema).
+
 #### stringToInteger
 
 The `zu.codec.stringToInteger()` codec is taken almost verbatim
@@ -81,6 +87,7 @@ const item: Integer = zu.codec.stringToInteger().parse("1234");
 #### stringToJson
 
 The `zu.codec.stringToJson()` codec transforms a string into JSON using JSON.parse.
+It uses `zu.codec.jsonParse(zu.json())` internally.
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";

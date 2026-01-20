@@ -1,12 +1,7 @@
-import { z } from "zod";
 import { json } from "../json/index.js";
-import { trusted } from "../lib.js";
-import { string } from "../string/index.js";
+import { jsonParse } from "./json-parse.js";
 
-const codec = z.codec(string.json(), json(), {
-  decode: (str) => JSON.parse(str),
-  encode: (json) => trusted(JSON.stringify(json)),
-});
+const codec = jsonParse(json());
 
 /**
  * A string to JSON codec.
