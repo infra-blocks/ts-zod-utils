@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "module": "node16",
     "outDir": "./lib/compile",

@@ -71,6 +71,20 @@ The `zu.codec.jsonParse(schema)` utility is a factory returning a codec where th
 `zu.string.json()` and the second one is the one provided as input. This is almost verbatim
 what is describe in [Zod's documentation](https://zod.dev/codecs#jsonschema).
 
+#### ms
+
+The `zu.codec.ms(options)` utility is a factory returning a codec where the schemas are
+`z.string()` and `z.number()`. The transformations in both directions are handled by the
+[ms](https://www.npmjs.com/package/ms) package. When encoding, the codec passes the options
+provided to `ms(number, options)`.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+
+const item: number = zu.codec.ms().parse("1d"); // item is 86400000.
+zu.codec.ms({ long: true }).encode(item); // result is "1 day".
+```
+
 #### stringSplit
 
 The `zu.codec.stringSplit(separator)` utility is a factory returning a codec where the first schema is

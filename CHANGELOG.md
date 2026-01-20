@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.23.0] - 2026-01-20
+
+### Added
+
+- `zu.codec.ms()`, which is a codec wrapping the [ms](https://www.npmjs.com/package/ms) package. In
+comes a string as expected by `ms`, out comes the result of running `ms(input)` on it. And vice-versa
+for the encoding.
+
 ## [0.22.0] - 2026-01-20
 
 ### Added
@@ -230,6 +238,8 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.23.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.22.0...v0.23.0
+[0.22.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.20.0...v0.21.0
 [0.20.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.19.0...v0.20.0
 [0.19.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.18.0...v0.19.0

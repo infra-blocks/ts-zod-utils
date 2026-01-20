@@ -3,6 +3,7 @@ import type { z } from "zod";
 import { aws } from "./aws/index.js";
 import { codec } from "./codec/index.js";
 import { geojson } from "./geojson/index.js";
+import { isValid } from "./is-valid.js";
 import { iso } from "./iso/index.js";
 import { json } from "./json/index.js";
 import { number } from "./number/index.js";
@@ -27,25 +28,6 @@ function typeGuard<S extends z.ZodType>(schema: S): TypeGuard<z.infer<S>> {
   return (value: unknown): value is z.infer<S> => {
     return isValid(schema, value);
   };
-}
-
-/**
- * Validates that the value satisfies the provided schema.
- *
- * Upon success, the value's type is narrowed to the schema's output type.
- *
- * It uses `safeParse` internally.
- *
- * @param schema - The schema to validate against.
- * @param value - The value to validate.
- *
- * @returns Whether the value satisfies the schema.
- */
-function isValid<S extends z.ZodType>(
-  schema: S,
-  value: unknown,
-): value is z.infer<S> {
-  return schema.safeParse(value).success;
 }
 
 const zu = {
