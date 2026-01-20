@@ -1,4 +1,7 @@
-import { array, json, object, primitive, stringifiedJson } from "./json.js";
+import { array } from "./array.js";
+import { json, stringifiedJson } from "./json.js";
+import { object } from "./object.js";
+import { primitive } from "./primitive.js";
 
 const module = Object.assign(json, {
   array,
