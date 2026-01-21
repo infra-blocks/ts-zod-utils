@@ -66,7 +66,7 @@
     "test:unit": "mocha --config test/unit/.mocharc.cjs 'test/unit/**/*.spec.ts'"
   },
   "dependencies": {
-    "@infra-blocks/types": "^0.24.0",
+    "@infra-blocks/types": "^0.26.0",
     "currency-codes": "^2.2.0",
     "iso-3166": "^4.4.0",
     "ms": "^2.1.3",

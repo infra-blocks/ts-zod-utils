@@ -1,5 +1,5 @@
+import { trusted } from "@infra-blocks/types";
 import { z } from "zod";
-import { trusted } from "../lib.js";
 import { string } from "../string/index.js";
 
 /**

@@ -1,6 +1,6 @@
+import { trusted } from "@infra-blocks/types";
 import { z } from "zod";
 import { zu } from "../index.js";
-import { trusted } from "../lib.js";
 import { number } from "../number/index.js";
 import { string } from "../string/index.js";
 
