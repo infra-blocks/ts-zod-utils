@@ -25,11 +25,12 @@ compiles and runs successfully.
 - [aws](#aws)
 - [codec](#codec)
 - [geojson](#geojson)
+- [inferBrand](#inferbrand)
 - [iso](#iso)
 - [json](#json)
 - [number](#number)
 - [string](#string)
-- [typeGuard](#type-guard)
+- [typeGuard](#typeguard)
 - [isValid](#is-valid)
 
 ### aws
@@ -274,6 +275,20 @@ zu.geojson().parse({
 });
 ```
 
+### inferBrand
+
+The `zu.inferBrand<T>` type utility extracts the brand(s) from a given type. It resolves to `never` if the
+type is not branded. It unionizes the brands if more than one exists.
+
+```typescript
+import { z } from "zod";
+import { zu } from "@infra-blocks/zod-utils";
+
+type Never = zu.inferBrand<string>; // Resolves to never.
+type StringBrand = zu.inferBrand<number & z.$brand<"Toto">>; // Resolves to "Toto".
+type UnionBrands = zu.inferBrand<number & z.$brand<"Toto"> & z.$brand<5>>; // Resolves to "Toto" | 5.
+```
+
 ### iso
 
 The `iso` module is an extension of `zod`'s own `iso` module. All schemas return [branded types](#branded-types).
@@ -408,7 +423,7 @@ expectTypeOf(result).toEqualTypeOf<NumberString>();
 expect(result).to.equal("1234.5678");
 ```
 
-### Type Guard
+### typeGuard
 
 The `typeGuard` utility allows to obtain a function that will act as a type guard for the type
 that the wrapped schema outputs. It is most useful with branded types, where the information
