@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.24.0] - 2026-01-22
+
+### Added
+
+- `zu.inferBrand<T>` to extrand the branding of a given type. Resolves either to the brand,
+or never if the type is not branded. Examples: `zu.inferBrand<AwsAccounId> = "AwsAccountId"`,
+`zu.inferBrand<string> = never`.
+
 ## [0.23.1] - 2026-01-21
 
 ### Changed

@@ -1,5 +1,6 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
 import { z } from "zod";
+import type { AwsAccountId } from "../../src/aws/account-id.js";
 import { zu } from "../../src/index.js";
 import { injectAwsTests } from "./aws/index.js";
 import { injectCodecTests } from "./codec/index.js";
@@ -19,6 +20,20 @@ describe("zu", () => {
   injectNumberTests();
   injectStringTests();
 
+  describe("inferBrand", () => {
+    it("should resolve to never for an unbranded type", () => {
+      type Brand = zu.inferBrand<string>;
+      expectTypeOf<Brand>().toBeNever();
+    });
+    it("should work with a regular branded type", () => {
+      type Brand = zu.inferBrand<AwsAccountId>;
+      expectTypeOf<Brand>().toEqualTypeOf<"AwsAccountId">();
+    });
+    it("should unionize several brands", () => {
+      type Brand = zu.inferBrand<AwsAccountId & z.$brand<5>>;
+      expectTypeOf<Brand>().toEqualTypeOf<"AwsAccountId" | 5>();
+    });
+  });
   describe(zu.typeGuard.name, () => {
     type Test = z.infer<typeof schema>;
 
