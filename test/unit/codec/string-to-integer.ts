@@ -4,8 +4,8 @@ import type { Integer } from "../../../src/number/types.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectStringToIntegerTests() {
-  describe(zu.codec.stringtoInteger.name, () => {
-    const codec = zu.codec.stringtoInteger();
+  describe(zu.codec.stringToInteger.name, () => {
+    const codec = zu.codec.stringToInteger();
 
     describe("parse", () => {
       const expectThrows = expectParseThrows(codec);
