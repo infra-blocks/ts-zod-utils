@@ -92,6 +92,25 @@ The `zu.codec.stringSplit(separator)` utility is a factory returning a codec whe
 `z.string()`, the second schema is `z.array(z.string())`, and the transformations back and forth
 are accomplished using `String.split` and `Array.join` respectively, using the provided separator.
 
+#### stringToBuffer
+
+The `zu.codec.stringToBuffer(encoding)` utility is a factory returning a codec where the first
+schema is `z.string()`, the secon schema is `z.instanceof(Buffer)`, and the transformations
+back and forth are accomplished using `Buffer.from` and `buffer.toString` with the provided
+encoding.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+
+// Defaults to utf-8, because Buffer functions default to utf-8.
+const utf8Codec = zu.codec.stringToBuffer();
+// A specific encoding can be provided.
+const base64Codec = zu.codec.stringToBuffer("base64");
+
+utf8Codec.parse("1234"); // Returns Buffer.from("1234");
+base64codec.parse("1234"); // Returns Buffer.from("1234", "base64");
+```
+
 #### stringToInteger
 
 The `zu.codec.stringToInteger()` codec is taken almost verbatim
