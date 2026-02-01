@@ -1,6 +1,5 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import type { IsoAlpha3CountryCode } from "../../../src/iso/types.js";
 
 export function isoCountryCodeTests() {
   describe("countryCode", () => {
@@ -14,12 +13,12 @@ export function isoCountryCodeTests() {
       // The greatest country on earth.
       it("should work with USA", () => {
         const result = zu.iso.countryCode.alpha3().parse("USA");
-        expectTypeOf(result).toEqualTypeOf<IsoAlpha3CountryCode>();
+        expectTypeOf(result).toEqualTypeOf<zu.IsoAlpha3CountryCode>();
         expect(result).to.equal("USA");
       });
       it("should work with CAN", () => {
         const result = zu.iso.countryCode.alpha3().parse("CAN");
-        expectTypeOf(result).toEqualTypeOf<IsoAlpha3CountryCode>();
+        expectTypeOf(result).toEqualTypeOf<zu.IsoAlpha3CountryCode>();
         expect(result).to.equal("CAN");
       });
     });

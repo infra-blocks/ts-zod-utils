@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.28.0] - 2026-02-01
+
+### Changed
+
+- Moved all type declarations at top level. For example, what used to be
+`import { AwsAccountId } from "@infra-blocks/zod-utils/aws` is now expressed as 
+`import { zu } from "@infra-blocks/zod-utils` and `zu.AwsAccountId`. Part of the idea before
+with the different path imports was to not pollute the global namespace. By mapping them all
+under the `zu` prefix, we preserve that trait. I made that change because it just got tedious
+to remember to update the `package.json` file and set a new path for every new sub modules.
+Plus, it's kind of not something you see often in the wild, and not how `zod` itself is built.
+I think, longer term, the goal will be to make a plugin architecture for extensions instead.
+To be continued.
+
 ## [0.27.0] - 2026-02-01
 
 ### Added
@@ -277,6 +291,7 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.28.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.27.0...v0.28.0
 [0.27.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.26.0...v0.27.0
 [0.26.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.25.0...v0.26.0
 [0.25.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.24.0...v0.25.0

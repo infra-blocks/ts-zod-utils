@@ -1,5 +1,4 @@
 import { expect } from "@infra-blocks/test";
-import type { GeoJsonCoordinate } from "../../../src/geojson/types.js";
 import { zu } from "../../../src/index.js";
 
 export function positionTests() {
@@ -7,12 +6,14 @@ export function positionTests() {
     const schema = zu.geojson.coordinate();
     describe("valid values", () => {
       it("should work with two-dimensional position", () => {
-        expect(schema.parse([1, 2])).to.deep.equal([1, 2] as GeoJsonCoordinate);
+        expect(schema.parse([1, 2])).to.deep.equal([
+          1, 2,
+        ] as zu.GeoJsonCoordinate);
       });
       it("should work with three-dimensional position", () => {
         expect(schema.parse([1, 2, 3])).to.deep.equal([
           1, 2, 3,
-        ] as GeoJsonCoordinate);
+        ] as zu.GeoJsonCoordinate);
       });
     });
     describe("invalid values", () => {

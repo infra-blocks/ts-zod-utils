@@ -1,14 +1,13 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
-import type { AwsArn } from "../../../src/aws/types.js";
 import { zu } from "../../../src/index.js";
 
 export function arnTests() {
   describe("AwsArn", () => {
     it("should be assignable to strings", () => {
-      expectTypeOf<AwsArn>().toExtend<string>();
+      expectTypeOf<zu.AwsArn>().toExtend<string>();
     });
     it("should not compile with string assignment", () => {
-      expectTypeOf<string>().not.toExtend<AwsArn>();
+      expectTypeOf<string>().not.toExtend<zu.AwsArn>();
     });
   });
   describe("arn", () => {
@@ -50,26 +49,26 @@ export function arnTests() {
     it("should parse valid ARN without region", () => {
       const value = "arn:aws:s3::123456789012:my-bucket";
       const arn = zu.aws.arn().parse(value);
-      expectTypeOf(arn).toEqualTypeOf<AwsArn>();
+      expectTypeOf(arn).toEqualTypeOf<zu.AwsArn>();
       expect(arn).to.equal(value);
     });
     it("should parse valid ARN without account ID", () => {
       const value = "arn:aws:s3:us-east-1::my-bucket";
       const arn = zu.aws.arn().parse(value);
-      expectTypeOf(arn).toEqualTypeOf<AwsArn>();
+      expectTypeOf(arn).toEqualTypeOf<zu.AwsArn>();
       expect(arn).to.equal(value);
     });
     it("should parse valid ARN with resource type delimited by colon", () => {
       const value =
         "arn:aws:lambda:us-east-1:123456789012:function:my-function:1";
       const arn = zu.aws.arn().parse(value);
-      expectTypeOf(arn).toEqualTypeOf<AwsArn>();
+      expectTypeOf(arn).toEqualTypeOf<zu.AwsArn>();
       expect(arn).to.equal(value);
     });
     it("should parse valid ARN with resource type delimited by slash", () => {
       const value = "arn:aws:iam:us-east-1:123456789012:user/joe-cunt";
       const arn = zu.aws.arn().parse(value);
-      expectTypeOf(arn).toEqualTypeOf<AwsArn>();
+      expectTypeOf(arn).toEqualTypeOf<zu.AwsArn>();
       expect(arn).to.equal(value);
     });
   });

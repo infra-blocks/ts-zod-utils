@@ -1,6 +1,5 @@
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import type { PositiveInteger } from "../../../src/number/types.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectPositiveIntegerTests() {
@@ -9,7 +8,7 @@ export function injectPositiveIntegerTests() {
     const expectThrows = expectParseThrows(schema);
     const expectEquals = expectParseEquals(schema);
     const expectWorks = (value: number) => {
-      expectTypeOf(expectEquals(value)).toEqualTypeOf<PositiveInteger>();
+      expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.PositiveInteger>();
     };
 
     it("should throw for undefined", () => {
