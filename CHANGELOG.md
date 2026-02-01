@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.25.0] - 2026-02-01
+
+### Added
+
+- `zu.string.base64url()`, the branded version of `z.base64url()`. Damn I'm annoying.
+
 ## [0.24.0] - 2026-01-22
 
 ### Added
@@ -253,6 +259,8 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.24.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.24.0...v0.25.0
+[0.24.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.23.0...v0.24.0
 [0.23.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.22.0...v0.23.0
 [0.22.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.21.0...v0.22.0
 [0.21.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.20.0...v0.21.0
