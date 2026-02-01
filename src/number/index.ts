@@ -1,9 +1,9 @@
 import { integer } from "./integer.js";
 import { positiveInteger } from "./positive-integer.js";
 
-const number = {
+export const number = {
   integer,
   positiveInteger,
 };
-
-export { number };
+export type { Integer } from "./integer.js";
+export type { PositiveInteger } from "./positive-integer.js";

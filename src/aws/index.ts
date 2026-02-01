@@ -3,11 +3,13 @@ import { arn } from "./arn.js";
 import { partition } from "./partition.js";
 import { region } from "./region.js";
 
-const aws = {
+export const aws = {
   accountId,
   arn,
   region,
   partition,
 };
-
-export { aws };
+export type { AwsAccountId } from "./account-id.js";
+export type { AwsArn } from "./arn.js";
+export type { AwsPartition } from "./partition.js";
+export type { AwsRegion } from "./region.js";

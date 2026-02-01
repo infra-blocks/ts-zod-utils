@@ -131,9 +131,8 @@ It uses `zu.codec.jsonParse(zu.json())` internally.
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import type { Json } from "@infra-blocks/zod-utils/json";
 
-const item: Json = zu.codec.stringToJson().parse('[1, "word", null]');
+const item: zu.Json = zu.codec.stringToJson().parse('[1, "word", null]');
 ```
 
 #### stringToUrl
@@ -198,53 +197,39 @@ they specifically need in their context, or which ones they'd like to extend and
 
 ```typescript
 import {zu} from "@infra-blocks/zod-utils";
-import {
-  GeoJson,
-  GeoJsonBoundingBox,
-  GeoJsonFeature,
-  GeoJsonFeatureCollection,
-  GeoJsonGeometryCollection,
-  GeoJsonLineString,
-  GeoJsonMultiLineString,
-  GeoJsonMultiPoint,
-  GeoJsonMultiPolygon,
-  GeoJsonPoint,
-  GeoJsonPolygon,
-  GeoJsonCoordinate
-} from "@infra-blocks/zod-utils/geojson";
 
 const boundingBoxSchema = zu.geojson.boundingBox();
-const boundingBox: GeoJsonBoundingBox = boundingBoxSchema.parse({...});
+const boundingBox: zu.GeoJsonBoundingBox = boundingBoxSchema.parse({...});
 
 const featureSchema = zu.geojson.feature();
-const feature: GeoJsonFeature = featureSchema.parse({...});
+const feature: zu.GeoJsonFeature = featureSchema.parse({...});
 
 const featureCollectionSchema = zu.geojson.featureCollection();
-const featureCollection: GeoJsonFeatureCollection = featureCollectionSchema.parse({...});
+const featureCollection: zu.GeoJsonFeatureCollection = featureCollectionSchema.parse({...});
 
 const geometryCollectionSchema = zu.geojson.geometryCollection();
-const geometryCollection: GeoJsonGeometryCollection = geometryCollectionSchema.parse({...});
+const geometryCollection: zu.GeoJsonGeometryCollection = geometryCollectionSchema.parse({...});
 
 const lineStringSchema = zu.geojson.lineString();
-const lineString: GeoJsonLineString = lineStringSchema.parse({...});
+const lineString: zu.GeoJsonLineString = lineStringSchema.parse({...});
 
 const multiLineStringSchema = zu.geojson.multiLineString();
-const multiLineString: GeoJsonMultiLineString = multiLineStringSchema.parse({...});
+const multiLineString: zu.GeoJsonMultiLineString = multiLineStringSchema.parse({...});
 
 const multiPointSchema = zu.geojson.multiPoint();
-const multiPoint: GeoJsonMultiPoint = multiPointSchema.parse({...});
+const multiPoint: zu.GeoJsonMultiPoint = multiPointSchema.parse({...});
 
 const multiPolygonSchema = zu.geojson.multiPolygon();
-const multiPolygon: GeoJsonMultiPolygon = multiPolygonSchema.parse({...});
+const multiPolygon: zu.GeoJsonMultiPolygon = multiPolygonSchema.parse({...});
 
 const pointSchema = zu.geojson.point();
-const point: GeoJsonPoint = pointSchema.parse({...});
+const point: zu.GeoJsonPoint = pointSchema.parse({...});
 
 const polygonSchema = zu.geojson.polygon();
-const polygon: GeoJsonPolygon = polygonSchema.parse({...});
+const polygon: zu.GeoJsonPolygon = polygonSchema.parse({...});
 
 const coordinateSchema = zu.geojson.coordinate();
-const coordinate: GeoJsonCoordinate = coordinateSchema.parse([1, 2]);
+const coordinate: zu.GeoJsonCoordinate = coordinateSchema.parse([1, 2]);
 ```
 
 #### Design considerations
@@ -314,7 +299,6 @@ The `iso` module is an extension of `zod`'s own `iso` module. All schemas return
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import type { IsoCurrencyCode, IsoAlpha3CountryCode } from "@infra-blocks/zod-utils/iso";
 
 zu.iso.currencyCode().parse("USD");
 zu.iso.currencyCode().parse("CAD");
@@ -358,24 +342,22 @@ zu.json().parse(new Set()); // Boom.
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import { Json, JsonArray, JsonObject, JsonPrimitive } from "@infra-blocks/zod-utils/json";
 
-// The type hints are used just to showcase their usage. They aren't necessary when parsing.
 // Want to parse a JSON primitive?
-const jsonPrimitive: JsonPrimitive = zu.json.primitive().parse(5);
+const jsonPrimitive: zu.JsonPrimitive = zu.json.primitive().parse(5);
 // Will throw for anything that is not a JSON primitive.
 zu.json.primitive().parse([]); // Boom.
 zu.json.primitive().parse({}); // Boom.
 zu.json.primitive().parse(undefined); // Boom.
 
 // A JSON array maybe?
-const jsonArray: JsonArray = zu.json.array().parse([1, 2, 3]);
+const jsonArray: zu.JsonArray = zu.json.array().parse([1, 2, 3]);
 // Will throw for anything that is not a JSON array.
 zu.json.array().parse(5); // Boom.
 zu.json.array().parse({}); // Boom.
 
 // And finally, what about making sure you get a JSON object?
-const jsonObject: JsonObject = zu.json.object().parse({ hello: "world" });
+const jsonObject: zu.JsonObject = zu.json.object().parse({ hello: "world" });
 // You know it by now, but just to make sure.
 zu.json.object().parse(5); // Boom.
 zu.json.object().parse([]); // Boom.
@@ -391,9 +373,8 @@ The `zu.number` module exports utilities for parsing numbers. All schemas return
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import { Integer } from "@infra-blocks/zod-utils/number";
 
-function expectsInteger(x: Integer) {
+function expectsInteger(x: zu.Integer) {
   // Do some bull here.
 }
 
@@ -406,9 +387,8 @@ expectsInteger(zu.number.integer().parse(42));
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import { PositiveInteger } from "@infra-blocks/zod-utils/number";
 
-function doingBull(x: PositiveInteger) {
+function doingBull(x: zu.PositiveInteger) {
   // Do some bull here.
 }
 
@@ -425,11 +405,10 @@ type.
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import { Base64UrlString } from "@infra-blocks/zod-utils/string";
 import { expectTypeOf } from "expect-type";
 
 const result = zu.string.base64url().parse("w6p0cmUgb3UgbmUgcGFzIMOqdHJlIGVzdGk_");
-expectTypeOf(result).toEqualTypeOf<IntegerString>();
+expectTypeOf(result).toEqualTypeOf<zu.IntegerString>();
 expect(result).to.equal("w6p0cmUgb3UgbmUgcGFzIMOqdHJlIGVzdGk_");
 ```
 
@@ -437,12 +416,11 @@ expect(result).to.equal("w6p0cmUgb3UgbmUgcGFzIMOqdHJlIGVzdGk_");
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import { IntegerString } from "@infra-blocks/zod-utils/string";
 import { expectTypeOf } from "expect-type";
 
 // Uses z.string().regex(z.regexes.integer) internally.
 const result = zu.string.integer().parse("1234");
-expectTypeOf(result).toEqualTypeOf<IntegerString>();
+expectTypeOf(result).toEqualTypeOf<zu.IntegerString>();
 expect(result).to.equal("1234");
 ```
 
@@ -450,11 +428,10 @@ expect(result).to.equal("1234");
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import { JsonString } from "@infra-blocks/zod-utils/string";
 import { expectTypeOf } from "expect-type";
 
 const result = zu.string.json().parse('[1, "word", null]');
-expectTypeOf(result).toEqualTypeOf<UrlString>();
+expectTypeOf(result).toEqualTypeOf<zu.UrlString>();
 expect(result).to.equal('[1, "word", null]');
 ```
 
@@ -462,12 +439,11 @@ expect(result).to.equal('[1, "word", null]');
 
 ```typescript
 import { zu } from "@infra-blocks/zod-utils";
-import { NumberString } from "@infra-blocks/zod-utils/string";
 import { expectTypeOf } from "expect-type";
 
 // Uses z.string().regex(z.regexes.number) internally.
 const result = zu.string.integer().parse("1234.5678");
-expectTypeOf(result).toEqualTypeOf<NumberString>();
+expectTypeOf(result).toEqualTypeOf<zu.NumberString>();
 expect(result).to.equal("1234.5678");
 ```
 

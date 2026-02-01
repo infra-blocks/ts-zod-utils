@@ -20,31 +20,6 @@
       "import": "./lib/esm/index.js",
       "require": "./lib/cjs/index.js",
       "default": "./lib/esm/index.js"
-    },
-    "./aws": {
-      "import": "./lib/esm/aws/types.js",
-      "require": "./lib/cjs/index.js",
-      "default": "./lib/esm/aws/types.js"
-    },
-    "./json": {
-      "import": "./lib/esm/json/types.js",
-      "require": "./lib/cjs/json/types.js",
-      "default": "./lib/esm/json/types.js"
-    },
-    "./iso": {
-      "import": "./lib/esm/iso/types.js",
-      "require": "./lib/cjs/iso/types.js",
-      "default": "./lib/esm/iso/types.js"
-    },
-    "./geojson": {
-      "import": "./lib/esm/geojson/types.js",
-      "require": "./lib/cjs/geojson/types.js",
-      "default": "./lib/esm/geojson/types.js"
-    },
-    "./string": {
-      "import": "./lib/esm/string/types.js",
-      "require": "./lib/cjs/string/types.js",
-      "default": "./lib/esm/string/types.js"
     }
   },
   "files": [

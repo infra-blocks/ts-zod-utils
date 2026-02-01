@@ -6,7 +6,7 @@ import { stringToInteger } from "./string-to-integer.js";
 import { stringToJson } from "./string-to-json.js";
 import { stringToUrl } from "./string-to-url.js";
 
-const codec = {
+export const codec = {
   csv,
   jsonParse,
   ms,
@@ -15,5 +15,3 @@ const codec = {
   stringToJson,
   stringToUrl,
 };
-
-export { codec };

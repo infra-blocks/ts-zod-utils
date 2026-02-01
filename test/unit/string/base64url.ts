@@ -1,6 +1,5 @@
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import type { Base64UrlString } from "../../../src/string/types.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectBase64UrlTests() {
@@ -8,12 +7,12 @@ export function injectBase64UrlTests() {
   const expectThrows = expectParseThrows(schema);
   const expectEquals = expectParseEquals(schema);
   const expectWorks = (value: string) => {
-    expectTypeOf(expectEquals(value)).toEqualTypeOf<Base64UrlString>();
+    expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.Base64UrlString>();
   };
 
   describe("base64url", () => {
     it("should be branded", () => {
-      expectTypeOf<string>().not.toExtend<Base64UrlString>();
+      expectTypeOf<string>().not.toExtend<zu.Base64UrlString>();
     });
     it("should throw for undefined", () => {
       expectThrows(undefined);

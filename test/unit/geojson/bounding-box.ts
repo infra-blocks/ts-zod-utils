@@ -1,5 +1,4 @@
 import { expect } from "@infra-blocks/test";
-import type { GeoJsonBoundingBox } from "../../../src/geojson/types.js";
 import { zu } from "../../../src/index.js";
 
 export function boundingBoxTests() {
@@ -9,12 +8,12 @@ export function boundingBoxTests() {
       it("should work with two-dimensional bounding box", () => {
         expect(schema.parse([1, 2, 3, 4])).to.deep.equal([
           1, 2, 3, 4,
-        ] as GeoJsonBoundingBox);
+        ] as zu.GeoJsonBoundingBox);
       });
       it("should work with three-dimensional bounding box", () => {
         expect(schema.parse([1, 2, 3, 4, 5, 6])).to.deep.equal([
           1, 2, 3, 4, 5, 6,
-        ] as GeoJsonBoundingBox);
+        ] as zu.GeoJsonBoundingBox);
       });
     });
     describe("invalid values", () => {

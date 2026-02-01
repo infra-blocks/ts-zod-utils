@@ -1,6 +1,5 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import type { IsoCurrencyCode } from "../../../src/iso/types.js";
 
 export function isoCurrencyCodeTests() {
   describe("currencyCode", () => {
@@ -12,12 +11,12 @@ export function isoCurrencyCodeTests() {
     });
     it("should work with USD", () => {
       const result = zu.iso.currencyCode().parse("USD");
-      expectTypeOf(result).toEqualTypeOf<IsoCurrencyCode>();
+      expectTypeOf(result).toEqualTypeOf<zu.IsoCurrencyCode>();
       expect(result).to.equal("USD");
     });
     it("should work with EUR", () => {
       const result = zu.iso.currencyCode().parse("EUR");
-      expectTypeOf(result).toEqualTypeOf<IsoCurrencyCode>();
+      expectTypeOf(result).toEqualTypeOf<zu.IsoCurrencyCode>();
       expect(result).to.equal("EUR");
     });
   });
