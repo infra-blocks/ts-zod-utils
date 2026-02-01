@@ -400,6 +400,21 @@ function expectsInteger(x: Integer) {
 expectsInteger(zu.number.integer().parse(42));
 ```
 
+#### positiveInteger
+
+`zu.number.positiveInteger()` produces a [branded type](#branded-types). It using `z.int().min(0)` internally.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { PositiveInteger } from "@infra-blocks/zod-utils/number";
+
+function doingBull(x: PositiveInteger) {
+  // Do some bull here.
+}
+
+doingBull(zu.number.positiveInteger().parse(42));
+```
+
 ### string
 
 The `zu.string` module exposes schemas for manipulating strings. All schemas return [branded types](#branded-types).
