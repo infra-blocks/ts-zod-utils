@@ -384,6 +384,20 @@ expectsInteger(zu.number.integer().parse(42));
 ### string
 
 The `zu.string` module exposes schemas for manipulating strings. All schemas return [branded types](#branded-types).
+Which means, their result can be used as strings anywhere, but strings cannot be used in place of the corresonding
+type.
+
+#### base64url
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { Base64UrlString } from "@infra-blocks/zod-utils/string";
+import { expectTypeOf } from "expect-type";
+
+const result = zu.string.base64url().parse("w6p0cmUgb3UgbmUgcGFzIMOqdHJlIGVzdGk_");
+expectTypeOf(result).toEqualTypeOf<IntegerString>();
+expect(result).to.equal("w6p0cmUgb3UgbmUgcGFzIMOqdHJlIGVzdGk_");
+```
 
 #### integer
 
