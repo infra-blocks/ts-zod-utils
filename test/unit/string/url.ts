@@ -18,6 +18,9 @@ export function injectUrlTests() {
     it("should throw for undefined", () => {
       expectThrows(undefined);
     });
+    it("should throw for empty string", () => {
+      expectThrows("");
+    });
     it("should throw for invalid url", () => {
       expectThrows("not-a-url");
     });

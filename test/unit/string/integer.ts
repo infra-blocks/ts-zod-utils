@@ -1,6 +1,5 @@
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import type { IntegerString } from "../../../src/string/integer.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectIntegerTests() {
@@ -8,15 +7,18 @@ export function injectIntegerTests() {
   const expectThrows = expectParseThrows(schema);
   const expectEquals = expectParseEquals(schema);
   const expectWorks = (value: string) => {
-    expectTypeOf(expectEquals(value)).toEqualTypeOf<IntegerString>();
+    expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.IntegerString>();
   };
 
   describe("integer", () => {
     it("should be branded", () => {
-      expectTypeOf<string>().not.toExtend<IntegerString>();
+      expectTypeOf<string>().not.toExtend<zu.IntegerString>();
     });
     it("should throw for undefined", () => {
       expectThrows(undefined);
+    });
+    it("should throw for empty string", () => {
+      expectThrows("");
     });
     it("should throw for invalid number string", () => {
       expectThrows("not an int");

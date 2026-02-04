@@ -1,6 +1,5 @@
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
-import type { JsonString } from "../../../src/string/json.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
 export function injectJsonTests() {
@@ -9,7 +8,7 @@ export function injectJsonTests() {
     const expectThrows = expectParseThrows(schema);
     const expectEquals = expectParseEquals(schema);
     const expectWorks = (value: string) => {
-      expectTypeOf(expectEquals(value)).toEqualTypeOf<JsonString>();
+      expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.JsonString>();
     };
 
     it("should throw for undefined", () => {

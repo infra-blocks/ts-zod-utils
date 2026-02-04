@@ -447,6 +447,18 @@ expectTypeOf(result).toEqualTypeOf<zu.NumberString>();
 expect(result).to.equal("1234.5678");
 ```
 
+### positiveInteger
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { expectTypeOf } from "expect-type";
+
+// Uses z.string().regex(/^\d+$/) internally.
+const result = zu.string.positiveInteger().parse("1234");
+expectTypeOf(result).toEqualTypeOf<zu.PositiveIntegerString>();
+expect(result).to.equal("1234");
+```
+
 ### typeGuard
 
 The `typeGuard` utility allows to obtain a function that will act as a type guard for the type
