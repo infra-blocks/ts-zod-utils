@@ -4,6 +4,7 @@ import { ms } from "./ms.js";
 import { stringToBuffer } from "./string-to-buffer.js";
 import { stringToInteger } from "./string-to-integer.js";
 import { stringToJson } from "./string-to-json.js";
+import { stringToPositiveInteger } from "./string-to-positive-integer.js";
 import { stringToUrl } from "./string-to-url.js";
 
 export const codec = {
@@ -13,5 +14,6 @@ export const codec = {
   stringToBuffer,
   stringToInteger,
   stringToJson,
+  stringToPositiveInteger,
   stringToUrl,
 };
