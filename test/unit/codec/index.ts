@@ -3,6 +3,7 @@ import { injectMsTests } from "./ms.js";
 import { injectStringToBufferTests } from "./string-to-buffer.js";
 import { injectStringToIntegerTests } from "./string-to-integer.js";
 import { injectStringToJsonTests } from "./string-to-json.js";
+import { injectStringToPositiveIntegerTests } from "./string-to-positive-integer.js";
 import { injectStringToUrlTests } from "./string-to-url.js";
 
 export function injectCodecTests() {
@@ -12,6 +13,7 @@ export function injectCodecTests() {
     injectStringToBufferTests();
     injectStringToIntegerTests();
     injectStringToJsonTests();
+    injectStringToPositiveIntegerTests();
     injectStringToUrlTests();
   });
 }

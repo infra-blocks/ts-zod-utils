@@ -135,6 +135,18 @@ import { zu } from "@infra-blocks/zod-utils";
 const item: zu.Json = zu.codec.stringToJson().parse('[1, "word", null]');
 ```
 
+#### stringToPositiveInteger
+
+The `zu.codec.stringToPositiveInteger()` is the `positiveInteger` variant of `zu.codec.stringToInteger`.
+The final type is `zu.PositiveInteger`.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+import { PositiveInteger } from "@infra-blocks/zod-utils";
+
+const item: PositiveInteger = zu.codec.stringToPositiveInteger().parse("1234");
+```
+
 #### stringToUrl
 
 The `zu.codec.stringToUrl()` codec is taken [Zod's own documentation](https://zod.dev/codecs#stringtourl).
