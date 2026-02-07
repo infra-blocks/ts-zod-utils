@@ -1,8 +1,8 @@
 import { expect, expectTypeOf } from "@infra-blocks/test";
+import { injectDirTests } from "@infra-blocks/test/mocha/bdd";
 import { z } from "zod";
 import type { AwsAccountId } from "../../src/aws/account-id.js";
 import { zu } from "../../src/index.js";
-import { injectAwsTests } from "./aws/index.js";
 import { injectCodecTests } from "./codec/index.js";
 import { injectGeoJsonTests } from "./geojson/index.js";
 import { injectIsoTests } from "./iso/index.js";
@@ -10,15 +10,15 @@ import { injectJsonTests } from "./json/index.js";
 import { injectNumberTests } from "./number/index.js";
 import { injectStringTests } from "./string/index.js";
 
-describe("zu", () => {
+describe("zu", async () => {
   // Submodules.
-  injectAwsTests();
   injectCodecTests();
   injectGeoJsonTests();
   injectIsoTests();
   injectJsonTests();
   injectNumberTests();
   injectStringTests();
+  await injectDirTests(import.meta.dirname);
 
   describe("inferBrand", () => {
     it("should resolve to never for an unbranded type", () => {

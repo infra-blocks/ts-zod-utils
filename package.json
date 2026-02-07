@@ -49,13 +49,13 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.10",
-    "@infra-blocks/test": "^0.6.0",
-    "@types/mocha": "^10.0.1",
+    "@infra-blocks/test": "file:../ts-test/infra-blocks-test-0.6.0.tgz",
+    "@types/mocha": "^10.0.10",
     "@types/ms": "^2.1.0",
     "@types/node": "^24.10.4",
     "c8": "^8.0.0",
     "lefthook": "^2.0.13",
-    "mocha": "^10.2.0",
+    "mocha": "^11.7.5",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
