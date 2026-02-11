@@ -1,3 +1,4 @@
+import { bytes } from "./bytes.js";
 import { csv } from "./csv.js";
 import { jsonParse } from "./json-parse.js";
 import { ms } from "./ms.js";
@@ -8,6 +9,7 @@ import { stringToPositiveInteger } from "./string-to-positive-integer.js";
 import { stringToUrl } from "./string-to-url.js";
 
 export const codec = {
+  bytes,
   csv,
   jsonParse,
   ms,

@@ -55,6 +55,20 @@ zu.aws.region().parse("us-east-1");
 
 The `zu.codec` module contains codecs.
 
+#### bytes
+
+The `zu.codec.bytes(options)` utility is a factory returning a codec where the schemas are
+`z.string()` and `z.number()`. The transformations in both directions are handled by the
+[bytes](https://www.npmjs.com/package/bytes) package. When encoding, the codec passes the options
+provided to `bytes.format(number, options)`.
+
+```typescript
+import { zu } from "@infra-blocks/zod-utils";
+
+const item: number = zu.codec.bytes().parse("1tb"); // item is 1099511627776.
+zu.codec.bytes({ unit: "mb" }).encode(item); // result is "1048576mb".
+```
+
 #### csv
 
 The `zu.codec.csv()` utility is a codec transforming a string into an array of string using the string `split` method
