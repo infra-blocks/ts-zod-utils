@@ -1,9 +1,10 @@
+import type { TestContext } from "node:test";
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import type { UrlString } from "../../../src/string/url.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
-export function injectUrlTests() {
+export async function injectUrlTests(t: TestContext) {
   const schema = zu.string.url();
   const expectThrows = expectParseThrows(schema);
   const expectEquals = expectParseEquals(schema);
@@ -11,23 +12,28 @@ export function injectUrlTests() {
     expectTypeOf(expectEquals(value)).toEqualTypeOf<UrlString>();
   };
 
-  describe("url", () => {
-    it("should be branded", () => {
+  await t.test("url", async (t) => {
+    await t.test("should be branded", () => {
       expectTypeOf<string>().not.toExtend<UrlString>();
     });
-    it("should throw for undefined", () => {
+
+    await t.test("should throw for undefined", () => {
       expectThrows(undefined);
     });
-    it("should throw for empty string", () => {
+
+    await t.test("should throw for empty string", () => {
       expectThrows("");
     });
-    it("should throw for invalid url", () => {
+
+    await t.test("should throw for invalid url", () => {
       expectThrows("not-a-url");
     });
-    it("should work for http://localhost:3000", () => {
+
+    await t.test("should work for http://localhost:3000", () => {
       expectEquals("http://localhost:3000");
     });
-    it("should work for stfp://user:pass@secret.com", () => {
+
+    await t.test("should work for stfp://user:pass@secret.com", () => {
       expectWorks("stfp://user:pass@secret.com");
     });
   });

@@ -1,34 +1,41 @@
+import type { TestContext } from "node:test";
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
-export function injectStringToJsonTests() {
-  describe("stringToJson", () => {
+export async function injectStringToJsonTests(t: TestContext) {
+  await t.test("stringToJson", async (t) => {
     const codec = zu.codec.stringToJson();
 
-    describe("parse", () => {
+    await t.test("parse", async (t) => {
       const expectThrows = expectParseThrows(codec);
       const expectEquals = expectParseEquals(codec);
 
-      it("should throw for undefined", () => {
+      await t.test("should throw for undefined", () => {
         expectThrows(undefined);
       });
-      it("should throw for empty string", () => {
+
+      await t.test("should throw for empty string", () => {
         expectThrows("");
       });
-      it("should throw for invalid json string", () => {
+
+      await t.test("should throw for invalid json string", () => {
         expectThrows("{ unclosed fucking bracket");
       });
-      it("should work with '5'", () => {
+
+      await t.test("should work with '5'", () => {
         expectEquals("5", 5);
       });
-      it("should work with 'word'", () => {
+
+      await t.test("should work with 'word'", () => {
         expectEquals('"word"', "word");
       });
-      it("should work with '[1, true, null]'", () => {
+
+      await t.test("should work with '[1, true, null]'", () => {
         expectEquals("[1, true, null]", [1, true, null]);
       });
-      it("should work with an object", () => {
+
+      await t.test("should work with an object", () => {
         const object = {
           number: 5,
           string: "toto",
@@ -40,21 +47,25 @@ export function injectStringToJsonTests() {
         expectEquals(JSON.stringify(object), object);
       });
     });
-    describe("decode", () => {
-      it("should require a string as input", () => {
+
+    await t.test("decode", async (t) => {
+      await t.test("should require a string as input", () => {
         // @ts-expect-error string required
         expect(() => codec.decode(1)).to.throw();
       });
-      it("should work with valid string input", () => {
+
+      await t.test("should work with valid string input", () => {
         expect(codec.decode("[1, 2, 3]")).to.deep.equal([1, 2, 3]);
       });
     });
-    describe("encode", () => {
-      it("should require JSON as input", () => {
+
+    await t.test("encode", async (t) => {
+      await t.test("should require JSON as input", () => {
         // @ts-expect-error JSON required.
         expect(() => codec.encode(42n)).to.throw();
       });
-      it("should give back a string with valid JSON", () => {
+
+      await t.test("should give back a string with valid JSON", () => {
         const decoded = codec.decode('{"hello":"world"}');
         const result = codec.encode(decoded);
         expect(result).to.equal('{"hello":"world"}');

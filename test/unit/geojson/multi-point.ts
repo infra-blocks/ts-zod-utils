@@ -1,25 +1,29 @@
+import type { TestContext } from "node:test";
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 
-export function multiPointTests() {
-  describe(zu.geojson.multiPoint.name, () => {
+export async function multiPointTests(t: TestContext) {
+  await t.test(zu.geojson.multiPoint.name, async (t) => {
     const schema = zu.geojson.multiPoint();
-    describe("valid values", () => {
-      it("should work with empty coordinates", () => {
+
+    await t.test("valid values", async (t) => {
+      await t.test("should work with empty coordinates", () => {
         const value = {
           type: "MultiPoint",
           coordinates: [],
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with two-dimensional coordinates", () => {
+
+      await t.test("should work with two-dimensional coordinates", () => {
         const value = {
           type: "MultiPoint",
           coordinates: [[1, 2]],
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with three-dimensional coordinates", () => {
+
+      await t.test("should work with three-dimensional coordinates", () => {
         const value = {
           type: "MultiPoint",
           coordinates: [[1, 2, 3]],
@@ -27,28 +31,32 @@ export function multiPointTests() {
         expect(schema.parse(value)).to.deep.equal(value);
       });
     });
-    describe("invalid values", () => {
+
+    await t.test("invalid values", async (t) => {
       const validValue = {
         type: "MultiPoint",
         coordinates: [[1, 2]],
       };
 
-      it("should throw for missing type", () => {
+      await t.test("should throw for missing type", () => {
         const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid type", () => {
+
+      await t.test("should throw for invalid type", () => {
         const value = {
           ...validValue,
           type: "BigMultiPoint",
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for missing coordinates", () => {
+
+      await t.test("should throw for missing coordinates", () => {
         const { coordinates: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid coordinates", () => {
+
+      await t.test("should throw for invalid coordinates", () => {
         const value = {
           ...validValue,
           coordinates: [1, 2],

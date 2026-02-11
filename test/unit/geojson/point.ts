@@ -1,18 +1,21 @@
+import type { TestContext } from "node:test";
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 
-export function pointTests() {
-  describe(zu.geojson.point.name, () => {
+export async function pointTests(t: TestContext) {
+  await t.test(zu.geojson.point.name, async (t) => {
     const schema = zu.geojson.point();
-    describe("valid values", () => {
-      it("should work with two-dimensional coordinates", () => {
+
+    await t.test("valid values", async (t) => {
+      await t.test("should work with two-dimensional coordinates", () => {
         const value = {
           type: "Point",
           coordinates: [1, 2],
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with three-dimensional coordinates", () => {
+
+      await t.test("should work with three-dimensional coordinates", () => {
         const value = {
           type: "Point",
           coordinates: [1, 2, 3],
@@ -20,35 +23,40 @@ export function pointTests() {
         expect(schema.parse(value)).to.deep.equal(value);
       });
     });
-    describe("invalid values", () => {
+
+    await t.test("invalid values", async (t) => {
       const validValue = {
         type: "Point",
         coordinates: [1, 2],
       };
 
-      it("should throw for missing type", () => {
+      await t.test("should throw for missing type", () => {
         const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid type", () => {
+
+      await t.test("should throw for invalid type", () => {
         const value = {
           ...validValue,
           type: "BigPoint",
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for missing coordinates", () => {
+
+      await t.test("should throw for missing coordinates", () => {
         const { coordinates: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid coordinates", () => {
+
+      await t.test("should throw for invalid coordinates", () => {
         const value = {
           ...validValue,
           coordinates: [1],
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for extra properties", () => {
+
+      await t.test("should throw for extra properties", () => {
         const value = {
           ...validValue,
           extra: "property",

@@ -1,8 +1,9 @@
+import type { TestContext } from "node:test";
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
-export function injectIntegerTests() {
+export async function injectIntegerTests(t: TestContext) {
   const schema = zu.string.integer();
   const expectThrows = expectParseThrows(schema);
   const expectEquals = expectParseEquals(schema);
@@ -10,32 +11,40 @@ export function injectIntegerTests() {
     expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.IntegerString>();
   };
 
-  describe("integer", () => {
-    it("should be branded", () => {
+  await t.test("integer", async (t) => {
+    await t.test("should be branded", () => {
       expectTypeOf<string>().not.toExtend<zu.IntegerString>();
     });
-    it("should throw for undefined", () => {
+
+    await t.test("should throw for undefined", () => {
       expectThrows(undefined);
     });
-    it("should throw for empty string", () => {
+
+    await t.test("should throw for empty string", () => {
       expectThrows("");
     });
-    it("should throw for invalid number string", () => {
+
+    await t.test("should throw for invalid number string", () => {
       expectThrows("not an int");
     });
-    it("should throw for float", () => {
+
+    await t.test("should throw for float", () => {
       expectThrows("123.456");
     });
-    it("should fail for number 0", () => {
+
+    await t.test("should fail for number 0", () => {
       expectThrows(0);
     });
-    it("should work for '0'", () => {
+
+    await t.test("should work for '0'", () => {
       expectWorks("0");
     });
-    it("should work for '-1'", () => {
+
+    await t.test("should work for '-1'", () => {
       expectWorks("-1");
     });
-    it("should work for '1'", () => {
+
+    await t.test("should work for '1'", () => {
       expectWorks("1");
     });
   });

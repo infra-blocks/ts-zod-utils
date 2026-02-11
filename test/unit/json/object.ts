@@ -1,12 +1,14 @@
+import type { TestContext } from "node:test";
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 
-export function injectObjectTests() {
-  describe("object", () => {
-    it("should work with empty object", () => {
+export async function injectObjectTests(t: TestContext) {
+  await t.test("object", async (t) => {
+    await t.test("should work with empty object", () => {
       expect(zu.json.object().parse({})).to.deep.equal({});
     });
-    it("should work with literal fields", () => {
+
+    await t.test("should work with literal fields", () => {
       const value = {
         number: 0,
         string: "stuff",
@@ -15,7 +17,8 @@ export function injectObjectTests() {
       };
       expect(zu.json.object().parse(value)).to.deep.equal(value);
     });
-    it("should work with a nested object", () => {
+
+    await t.test("should work with a nested object", () => {
       const value = {
         object: {
           number: 0,
@@ -26,13 +29,15 @@ export function injectObjectTests() {
       };
       expect(zu.json.object().parse(value)).to.deep.equal(value);
     });
-    it("should work with a nested array", () => {
+
+    await t.test("should work with a nested array", () => {
       const value = {
         array: [42, "hello", false, null],
       };
       expect(zu.json.object().parse(value)).to.deep.equal(value);
     });
-    it("should work as a default value", () => {
+
+    await t.test("should work as a default value", () => {
       const value = {
         number: 0,
         string: "stuff",
@@ -43,16 +48,20 @@ export function injectObjectTests() {
         value,
       );
     });
-    it("should throw for undefined", () => {
+
+    await t.test("should throw for undefined", () => {
       expect(() => zu.json.object().parse(undefined)).to.throw();
     });
-    it("should throw for an undefined field", () => {
+
+    await t.test("should throw for an undefined field", () => {
       expect(() => zu.json.object().parse({ oops: undefined })).to.throw();
     });
-    it("should throw for a primitive", () => {
+
+    await t.test("should throw for a primitive", () => {
       expect(() => zu.json.object().parse(42)).to.throw();
     });
-    it("should throw for an array", () => {
+
+    await t.test("should throw for an array", () => {
       expect(() => zu.json.object().parse([])).to.throw();
     });
   });

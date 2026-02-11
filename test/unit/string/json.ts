@@ -1,9 +1,10 @@
+import type { TestContext } from "node:test";
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
-export function injectJsonTests() {
-  describe("json", () => {
+export async function injectJsonTests(t: TestContext) {
+  await t.test("json", async (t) => {
     const schema = zu.string.json();
     const expectThrows = expectParseThrows(schema);
     const expectEquals = expectParseEquals(schema);
@@ -11,25 +12,31 @@ export function injectJsonTests() {
       expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.JsonString>();
     };
 
-    it("should throw for undefined", () => {
+    await t.test("should throw for undefined", () => {
       expectThrows(undefined);
     });
-    it("should throw for empty string", () => {
+
+    await t.test("should throw for empty string", () => {
       expectThrows("");
     });
-    it("should throw for invalid json string", () => {
+
+    await t.test("should throw for invalid json string", () => {
       expectThrows("{ unclosed fucking bracket");
     });
-    it("should work with '5'", () => {
+
+    await t.test("should work with '5'", () => {
       expectWorks("5");
     });
-    it("should work with 'word'", () => {
+
+    await t.test("should work with 'word'", () => {
       expectWorks('"word"');
     });
-    it("should work with '[1, true, null]'", () => {
+
+    await t.test("should work with '[1, true, null]'", () => {
       expectWorks("[1, true, null]");
     });
-    it("should work with an object", () => {
+
+    await t.test("should work with an object", () => {
       const object = {
         number: 5,
         string: "toto",

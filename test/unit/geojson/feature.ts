@@ -1,11 +1,13 @@
+import type { TestContext } from "node:test";
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 
-export function featureTests() {
-  describe(zu.geojson.feature.name, () => {
+export async function featureTests(t: TestContext) {
+  await t.test(zu.geojson.feature.name, async (t) => {
     const schema = zu.geojson.feature();
-    describe("valid values", () => {
-      it("should work with null geometry", () => {
+
+    await t.test("valid values", async (t) => {
+      await t.test("should work with null geometry", () => {
         const value = {
           type: "Feature",
           geometry: null,
@@ -13,7 +15,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a string id", () => {
+
+      await t.test("should work with a string id", () => {
         const value = {
           type: "Feature",
           id: "big-feature-id",
@@ -22,7 +25,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a number id", () => {
+
+      await t.test("should work with a number id", () => {
         const value = {
           type: "Feature",
           id: 42,
@@ -31,7 +35,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with empty properties", () => {
+
+      await t.test("should work with empty properties", () => {
         const value = {
           type: "Feature",
           geometry: null,
@@ -39,7 +44,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with any properties", () => {
+
+      await t.test("should work with any properties", () => {
         const value = {
           type: "Feature",
           geometry: null,
@@ -54,7 +60,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a line string", () => {
+
+      await t.test("should work with a line string", () => {
         const value = {
           type: "Feature",
           geometry: {
@@ -68,7 +75,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a multi-line string", () => {
+
+      await t.test("should work with a multi-line string", () => {
         const value = {
           type: "Feature",
           geometry: {
@@ -84,7 +92,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a multi-point", () => {
+
+      await t.test("should work with a multi-point", () => {
         const value = {
           type: "Feature",
           geometry: {
@@ -95,7 +104,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a multi-polygon", () => {
+
+      await t.test("should work with a multi-polygon", () => {
         const value = {
           type: "Feature",
           geometry: {
@@ -106,7 +116,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a point", () => {
+
+      await t.test("should work with a point", () => {
         const value = {
           type: "Feature",
           geometry: {
@@ -117,7 +128,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a polygon", () => {
+
+      await t.test("should work with a polygon", () => {
         const value = {
           type: "Feature",
           geometry: {
@@ -128,7 +140,8 @@ export function featureTests() {
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a geometry collection", () => {
+
+      await t.test("should work with a geometry collection", () => {
         const value = {
           type: "Feature",
           geometry: {
@@ -145,7 +158,8 @@ export function featureTests() {
         expect(schema.parse(value)).to.deep.equal(value);
       });
     });
-    describe("invalid values", () => {
+
+    await t.test("invalid values", async (t) => {
       const validValue = {
         type: "Feature",
         geometry: {
@@ -155,22 +169,25 @@ export function featureTests() {
         properties: null,
       };
 
-      it("should throw for missing type", () => {
+      await t.test("should throw for missing type", () => {
         const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid type", () => {
+
+      await t.test("should throw for invalid type", () => {
         const value = {
           ...validValue,
           type: "BigFeature",
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for missing geometry", () => {
+
+      await t.test("should throw for missing geometry", () => {
         const { geometry: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid geometry", () => {
+
+      await t.test("should throw for invalid geometry", () => {
         const value = {
           ...validValue,
           geometry: {
@@ -180,41 +197,50 @@ export function featureTests() {
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for missing properties", () => {
+
+      await t.test("should throw for missing properties", () => {
         const { properties: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for properties that aren't an object", () => {
+
+      await t.test("should throw for properties that aren't an object", () => {
         const value = {
           ...validValue,
           properties: "not an object",
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for properties that aren't a valid json object", () => {
-        const value = {
-          ...validValue,
-          properties: {
-            key: new Set(),
-          },
-        };
-        expect(() => schema.parse(value)).to.throw();
-      });
-      it("should throw for null id", () => {
+
+      await t.test(
+        "should throw for properties that aren't a valid json object",
+        () => {
+          const value = {
+            ...validValue,
+            properties: {
+              key: new Set(),
+            },
+          };
+          expect(() => schema.parse(value)).to.throw();
+        },
+      );
+
+      await t.test("should throw for null id", () => {
         const value = {
           ...validValue,
           id: null,
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid id", () => {
+
+      await t.test("should throw for invalid id", () => {
         const value = {
           ...validValue,
           id: false,
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for extra properties", () => {
+
+      await t.test("should throw for extra properties", () => {
         const value = {
           ...validValue,
           extra: "boom",

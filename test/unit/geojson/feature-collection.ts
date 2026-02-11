@@ -1,18 +1,21 @@
+import type { TestContext } from "node:test";
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 
-export function featureCollectionTests() {
-  describe(zu.geojson.featureCollection.name, () => {
+export async function featureCollectionTests(t: TestContext) {
+  await t.test(zu.geojson.featureCollection.name, async (t) => {
     const schema = zu.geojson.featureCollection();
-    describe("valid values", () => {
-      it("should work with empty features", () => {
+
+    await t.test("valid values", async (t) => {
+      await t.test("should work with empty features", () => {
         const value = {
           type: "FeatureCollection",
           features: [],
         };
         expect(schema.parse(value)).to.deep.equal(value);
       });
-      it("should work with a single feature", () => {
+
+      await t.test("should work with a single feature", () => {
         const value = {
           type: "FeatureCollection",
           features: [
@@ -26,7 +29,8 @@ export function featureCollectionTests() {
         expect(schema.parse(value)).to.deep.equal(value);
       });
     });
-    describe("invalid values", () => {
+
+    await t.test("invalid values", async (t) => {
       const validValue = {
         type: "FeatureCollection",
         features: [
@@ -41,29 +45,33 @@ export function featureCollectionTests() {
         ],
       };
 
-      it("should throw for missing type", () => {
+      await t.test("should throw for missing type", () => {
         const { type: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid type", () => {
+
+      await t.test("should throw for invalid type", () => {
         const value = {
           ...validValue,
           type: "BigFeatureCollection",
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for missing features", () => {
+
+      await t.test("should throw for missing features", () => {
         const { features: _, ...value } = validValue;
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for invalid features", () => {
+
+      await t.test("should throw for invalid features", () => {
         const value = {
           ...validValue,
           features: [{ type: "BigFeature" }],
         };
         expect(() => schema.parse(value)).to.throw();
       });
-      it("should throw for extra properties", () => {
+
+      await t.test("should throw for extra properties", () => {
         const value = {
           ...validValue,
           extra: "boom",
