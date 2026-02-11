@@ -1,23 +1,27 @@
+import type { TestContext } from "node:test";
 import { expect } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 
-export function boundingBoxTests() {
-  describe(zu.geojson.boundingBox.name, () => {
+export async function boundingBoxTests(t: TestContext) {
+  await t.test(zu.geojson.boundingBox.name, async (t) => {
     const schema = zu.geojson.boundingBox();
-    describe("valid values", () => {
-      it("should work with two-dimensional bounding box", () => {
+
+    await t.test("valid values", async (t) => {
+      await t.test("should work with two-dimensional bounding box", () => {
         expect(schema.parse([1, 2, 3, 4])).to.deep.equal([
           1, 2, 3, 4,
         ] as zu.GeoJsonBoundingBox);
       });
-      it("should work with three-dimensional bounding box", () => {
+
+      await t.test("should work with three-dimensional bounding box", () => {
         expect(schema.parse([1, 2, 3, 4, 5, 6])).to.deep.equal([
           1, 2, 3, 4, 5, 6,
         ] as zu.GeoJsonBoundingBox);
       });
     });
-    describe("invalid values", () => {
-      it("should throw for tuple of 5", () => {
+
+    await t.test("invalid values", async (t) => {
+      await t.test("should throw for tuple of 5", () => {
         expect(() => schema.parse([1, 2, 3, 4, 5])).to.throw();
       });
     });

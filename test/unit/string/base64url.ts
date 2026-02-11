@@ -1,8 +1,9 @@
+import type { TestContext } from "node:test";
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
-export function injectBase64UrlTests() {
+export async function injectBase64UrlTests(t: TestContext) {
   const schema = zu.string.base64url();
   const expectThrows = expectParseThrows(schema);
   const expectEquals = expectParseEquals(schema);
@@ -10,21 +11,25 @@ export function injectBase64UrlTests() {
     expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.Base64UrlString>();
   };
 
-  describe("base64url", () => {
-    it("should be branded", () => {
+  await t.test("base64url", async (t) => {
+    await t.test("should be branded", () => {
       expectTypeOf<string>().not.toExtend<zu.Base64UrlString>();
     });
-    it("should throw for undefined", () => {
+
+    await t.test("should throw for undefined", () => {
       expectThrows(undefined);
     });
-    it("should throw for invalid string", () => {
+
+    await t.test("should throw for invalid string", () => {
       // This is base64, but not base64url
       expectThrows("SGVsbG8gV29ybGQhCg==");
     });
-    it("should work for empty string", () => {
+
+    await t.test("should work for empty string", () => {
       expectWorks("");
     });
-    it("should work for valid string", () => {
+
+    await t.test("should work for valid string", () => {
       expectWorks(
         "eW91IHRoaW5rIHlvdSdyZSBzbWFydCBmb3IgcmVhZGluZyB0aGlzIGVzw6k_",
       );

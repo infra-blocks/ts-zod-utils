@@ -1,9 +1,10 @@
+import type { TestContext } from "node:test";
 import { expectTypeOf } from "@infra-blocks/test";
 import { zu } from "../../../src/index.js";
 import { expectParseEquals, expectParseThrows } from "../lib.js";
 
-export function injectPositiveIntegerTests() {
-  describe("positiveInteger", () => {
+export async function injectPositiveIntegerTests(t: TestContext) {
+  await t.test("positiveInteger", async (t) => {
     const schema = zu.number.positiveInteger();
     const expectThrows = expectParseThrows(schema);
     const expectEquals = expectParseEquals(schema);
@@ -11,19 +12,23 @@ export function injectPositiveIntegerTests() {
       expectTypeOf(expectEquals(value)).toEqualTypeOf<zu.PositiveInteger>();
     };
 
-    it("should throw for undefined", () => {
+    await t.test("should throw for undefined", () => {
       expectThrows(undefined);
     });
-    it("should throw for float", () => {
+
+    await t.test("should throw for float", () => {
       expectThrows(123.456);
     });
-    it("should throw for -1", () => {
+
+    await t.test("should throw for -1", () => {
       expectThrows(-1);
     });
-    it("should work with 0", () => {
+
+    await t.test("should work with 0", () => {
       expectWorks(0);
     });
-    it("should work with 1", () => {
+
+    await t.test("should work with 1", () => {
       expectWorks(1);
     });
   });

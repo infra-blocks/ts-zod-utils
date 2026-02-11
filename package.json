@@ -37,8 +37,7 @@
     "test": "npm run test:unit",
     "test:coverage": "c8 npm run test",
     "test:coverage:lcov": "c8 --reporter=lcov npm run test",
-    "test:integration": "mocha --config test/integration/.mocharc.js 'test/integration/**/*.spec.ts'",
-    "test:unit": "mocha --config test/unit/.mocharc.cjs 'test/unit/**/*.spec.ts'"
+    "test:unit": "node --import tsx --test 'test/unit/**/*.spec.ts'"
   },
   "dependencies": {
     "@infra-blocks/types": "^0.26.0",
@@ -50,12 +49,10 @@
   "devDependencies": {
     "@biomejs/biome": "^2.3.10",
     "@infra-blocks/test": "^0.6.0",
-    "@types/mocha": "^10.0.1",
     "@types/ms": "^2.1.0",
     "@types/node": "^24.10.4",
     "c8": "^8.0.0",
     "lefthook": "^2.0.13",
-    "mocha": "^10.2.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   },
