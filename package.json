@@ -43,6 +43,7 @@
     "@infra-blocks/types": "^0.26.0",
     "bytes": "^3.1.2",
     "currency-codes": "^2.2.0",
+    "es-toolkit": "^1.45.1",
     "iso-3166": "^4.4.0",
     "ms": "^2.1.3",
     "zod": "^4.2.1"

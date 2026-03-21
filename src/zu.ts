@@ -6,6 +6,8 @@ export * from "./geojson/index.js";
 export { isValid } from "./is-valid.js";
 export * from "./iso/index.js";
 export * from "./json/index.js";
+export type * from "./literal-object.js";
+export { literalObject } from "./literal-object.js";
 export * from "./number/index.js";
 export * from "./string/index.js";
 export { typeGuard } from "./type-guard.js";
