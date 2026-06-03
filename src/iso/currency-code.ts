@@ -1,4 +1,4 @@
-import * as currencyCodes from "currency-codes";
+import * as currencyCodes from "fresh-currency-codes";
 import { z } from "zod";
 
 const ISO_CODES = currencyCodes.codes();
