@@ -1,5 +1,6 @@
 import { bytes } from "./bytes.js";
 import { csv } from "./csv.js";
+import { isoDatetimeToDate } from "./iso-datetime-to-date.js";
 import { jsonParse } from "./json-parse.js";
 import { ms } from "./ms.js";
 import { stringToBuffer } from "./string-to-buffer.js";
@@ -11,6 +12,7 @@ import { stringToUrl } from "./string-to-url.js";
 export const codec = {
   bytes,
   csv,
+  isoDatetimeToDate,
   jsonParse,
   ms,
   stringToBuffer,
