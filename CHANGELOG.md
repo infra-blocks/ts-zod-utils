@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.32.0] - 2026-10-02
+
+### Added
+
+- The `zu.codec.isoDatetimeToDate` codec, taken almost verbatim from
+[Zod's own documentation](https://zod.dev/codecs?id=isodatetimetodate).
+
 ## [0.31.0] - 2026-02-11
 
 ### Added
@@ -312,6 +319,9 @@ publication didn't succeed completely. This is a re-release.
 
 - First iteration of the library. It has JSON parsing utilities.
 
+[0.32.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.31.0...v0.32.0
+[0.31.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.30.0...v0.31.0
+[0.30.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.29.0...v0.30.0
 [0.29.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.28.0...v0.29.0
 [0.28.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.27.0...v0.28.0
 [0.27.0]: https://github.com/infra-blocks/ts-zod-utils/compare/v0.26.0...v0.27.0
